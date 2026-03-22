@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Metro Bilbao · Agenda Marzo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --l1:#C8102E;--l2:#0055A5;--sport:#1A7F37;--kk:#7C3AED;
+  --white:#FFF;--bg:#F7F8FA;--s1:#F0F1F4;--s2:#E4E6EB;--s3:#D1D5DE;
+  --tx1:#111318;--tx2:#4A5263;--tx3:#9098A9;--tx4:#BFC5D0;
+  --sh-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sh-md:0 4px 14px rgba(0,0,0,.09),0 1px 3px rgba(0,0,0,.04);
+  --r:8px;--r-sm:5px;--font:'Inter',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--tx1);height:100vh;display:flex;flex-direction:column;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+header{background:var(--white);border-bottom:1.5px solid var(--s2);padding:0 16px;height:50px;display:flex;align-items:center;gap:10px;flex-shrink:0;box-shadow:var(--sh-sm);z-index:10}
+.brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.brand-logo{display:flex;gap:3px}
+.mdot{width:9px;height:9px;border-radius:50%}
+.brand h1{font-size:12px;font-weight:700;color:var(--tx1);white-space:nowrap}
+.brand h1 span{font-weight:400;color:var(--tx3)}
+.hdiv{width:1px;height:20px;background:var(--s2);flex-shrink:0}
+.wpills{display:flex;gap:3px}
+.wpill{cursor:pointer;padding:3px 11px;border-radius:20px;font-size:10px;font-weight:500;color:var(--tx3);border:1px solid transparent;transition:all .15s;user-select:none;white-space:nowrap}
+.wpill:hover{background:var(--s1);color:var(--tx2)}
+.wpill.active{background:var(--l1);color:#fff;font-weight:600}
+.ttabs{display:flex;gap:3px}
+.ttab{cursor:pointer;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:500;color:var(--tx3);border:1.5px solid var(--s2);background:transparent;transition:all .15s;user-select:none;white-space:nowrap}
+.ttab:hover{border-color:var(--s3);color:var(--tx2)}
+.ttab.active[data-type="all"]{background:var(--tx1);border-color:var(--tx1);color:#fff}
+.ttab.active[data-type="cultura"]{background:var(--l1);border-color:var(--l1);color:#fff}
+.ttab.active[data-type="biz"]{background:var(--l2);border-color:var(--l2);color:#fff}
+.ttab.active[data-type="deporte"]{background:var(--sport);border-color:var(--sport);color:#fff}
+.ttab.active[data-type="kk"]{background:var(--kk);border-color:var(--kk);color:#fff}
+.h-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.api-badge{display:flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:9px;font-weight:600;border:1.5px solid var(--s2);background:var(--white);cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.api-badge:hover{border-color:var(--kk)}
+.api-badge.loading{border-color:#FDE68A;background:#FFFBEB;color:#D97706}
+.api-badge.ok{border-color:#BBF7D0;background:#F0FDF4;color:#166534}
+.api-badge.error{border-color:#FECACA;background:#FEF2F2;color:#991B1B}
+.api-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.kpis{display:flex;align-items:center;gap:10px}
+.kpi{text-align:right}
+.kv{font-size:18px;font-weight:800;line-height:1;letter-spacing:-1px;color:var(--tx1)}
+.kl{font-size:7px;font-weight:500;color:var(--tx3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px}
+
+/* ── DAY BAR ── */
+.daybar{background:var(--white);border-bottom:1px solid var(--s2);padding:5px 16px;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.dbar-lbl{font-size:8px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.7px;margin-right:4px;white-space:nowrap}
+#day-strip{display:flex;gap:4px}
+.dbtn{cursor:pointer;border-radius:var(--r-sm);padding:3px 6px;min-width:34px;text-align:center;background:transparent;border:1px solid var(--s2);transition:all .15s;user-select:none;flex-shrink:0}
+.dbtn:hover{background:var(--s1)}.dbtn.active{background:var(--l1);border-color:var(--l1)}
+.dbtn.active .dnum,.dbtn.active .dn{color:#fff!important}
+.dn{font-size:7px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.4px}
+.dnum{font-size:11px;font-weight:700;color:var(--tx3);line-height:1.1}
+.dbtn.has .dnum{color:var(--tx1)}.dbtn.has .dn{color:var(--tx2)}
+.dbtn.today .dn{color:var(--l1)}
+.dpips{display:flex;gap:1px;justify-content:center;margin-top:2px;min-height:4px}
+.pip{width:4px;height:4px;border-radius:50%}
+.dstat{margin-left:auto;font-size:9px;color:var(--tx3);white-space:nowrap}
+.dstat b{color:var(--tx1);font-weight:700}
+
+/* ── MAIN 3-COL ── */
+.main{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* ── LEFT: FILTERS ── */
+.lsb{width:195px;flex-shrink:0;background:var(--white);border-right:1px solid var(--s2);display:flex;flex-direction:column;overflow:hidden}
+.lsb-scroll{flex:1;overflow-y:auto;padding:11px 12px 20px}
+.lsb-scroll::-webkit-scrollbar{width:3px}
+.lsb-scroll::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+.fsec{margin-bottom:16px}
+.fs-ttl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--tx3);margin-bottom:6px}
+.srch-wrap{position:relative}
+.srch-wrap input{width:100%;padding:6px 10px 6px 26px;border:1px solid var(--s2);border-radius:var(--r-sm);font-family:var(--font);font-size:10px;color:var(--tx1);background:var(--bg);outline:none;transition:border-color .15s}
+.srch-wrap input:focus{border-color:var(--l1);background:#fff}
+.srch-wrap input::placeholder{color:var(--tx3)}
+.srch-ico{position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--tx3);font-size:11px}
+.cb-row{display:flex;align-items:center;gap:5px;padding:2px 0;cursor:pointer;user-select:none}
+.cb-row:hover .cb-lbl{color:var(--tx1)}
+.cb-box{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--s3);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;transition:all .15s}
+.cb-row.on .cb-box{border-color:var(--l1);background:var(--l1)}
+.cb-chk{color:#fff;font-size:7px;display:none}.cb-row.on .cb-chk{display:block}
+.cb-ico{font-size:9px;flex-shrink:0}
+.cb-lbl{font-size:9px;color:var(--tx2);transition:color .15s;line-height:1.3}
+.cb-cnt{margin-left:auto;font-size:8px;color:var(--tx3);background:var(--s1);padding:1px 4px;border-radius:8px;flex-shrink:0}
+.cat-ghd{font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tx4);margin:7px 0 2px;padding-bottom:2px;border-bottom:1px solid var(--s1)}
+.time-col{display:flex;flex-direction:column;gap:3px}
+.fpill{cursor:pointer;padding:4px 8px;border-radius:var(--r-sm);font-size:9px;color:var(--tx2);background:var(--bg);border:1px solid transparent;transition:all .15s;user-select:none;display:flex;align-items:center;gap:5px}
+.fpill:hover{background:var(--s1)}
+.fpill.active{background:#FDF0F2;border-color:#F5C0C8;color:var(--l1);font-weight:600}
+.fpill.active[data-time="mañana"]{background:#FFFBEB;border-color:#FDE68A;color:#D97706}
+.fpill.active[data-time="tarde"]{background:#FFF7ED;border-color:#FED7AA;color:#C2410C}
+.fpill.active[data-time="noche"]{background:#F5F3FF;border-color:#DDD6FE;color:#7C3AED}
+.line-btns{display:flex;gap:4px;flex-wrap:wrap}
+.lbtn{cursor:pointer;padding:3px 9px;border-radius:20px;font-size:9px;font-weight:700;border:1.5px solid var(--s2);background:transparent;color:var(--tx3);transition:all .15s;user-select:none}
+.lbtn:hover{border-color:var(--tx3)}
+.lbtn.active[data-line="all"]{background:var(--tx1);border-color:var(--tx1);color:#fff}
+.lbtn.active[data-line="L1"]{background:var(--l1);border-color:var(--l1);color:#fff}
+.lbtn.active[data-line="L2"]{background:var(--l2);border-color:var(--l2);color:#fff}
+.legend-list{display:flex;flex-direction:column;gap:4px}
+.lgi{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--tx2)}
+.lgd{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.kk-refetch{margin-top:5px;cursor:pointer;font-size:8px;font-weight:600;color:var(--kk);text-decoration:underline}
+#kk-status{font-size:7.5px;color:var(--tx3);margin-top:3px;line-height:1.4}
+
+/* ── CENTER: VERTICAL METRO MAP ── */
+.map-col{
+  width:280px;flex-shrink:0;
+  background:var(--white);border-right:1px solid var(--s2);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.map-hd{
+  padding:10px 14px 6px;
+  display:flex;flex-direction:column;gap:2px;flex-shrink:0;
+  border-bottom:1px solid var(--s1);
+}
+.map-hd-title{font-size:9px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.map-hd-sub{font-size:8px;color:var(--tx3)}
+.map-svg-wrap{flex:1;overflow-y:auto;padding:12px 6px 12px}
+.map-svg-wrap::-webkit-scrollbar{width:3px}
+.map-svg-wrap::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+#metro-svg{width:100%;display:block}
+
+/* Station chips below map */
+.chips-section{flex-shrink:0;border-top:1px solid var(--s1);padding:8px 10px;display:flex;flex-direction:column;gap:4px;max-height:150px;overflow-y:auto}
+.chips-section::-webkit-scrollbar{width:3px}
+.chips-section::-webkit-scrollbar-thumb{background:var(--s2)}
+.chips-hd{font-size:8px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.chips{display:flex;flex-direction:column;gap:3px}
+.chip{background:var(--bg);border:1px solid var(--s2);border-radius:var(--r-sm);padding:4px 8px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.chip:hover{background:var(--s1);border-color:var(--s3)}
+.chip-left{display:flex;align-items:center;gap:6px}
+.chip-nm{font-size:9px;font-weight:600;color:var(--tx2)}
+.chip-v{font-size:13px;font-weight:800;letter-spacing:-.4px;line-height:1}
+.chip-s{font-size:7px;color:var(--tx3)}
+
+/* ── RIGHT: EVENT CARDS ── */
+.rsb{flex:1;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.rsb-top{padding:10px 14px 8px;background:#fff;border-bottom:1px solid var(--s2);flex-shrink:0}
+.rsb-title{font-size:13px;font-weight:700;color:var(--tx1);line-height:1.2}
+.rsb-sub{font-size:9px;color:var(--tx3);margin-top:2px}
+.rsb-scroll{flex:1;overflow-y:auto;padding:10px 12px}
+.rsb-scroll::-webkit-scrollbar{width:3px}
+.rsb-scroll::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+
+/* Cards grid for wider space */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+
+.ecard{background:#fff;border-radius:var(--r);box-shadow:var(--sh-sm);border:1px solid var(--s2);border-top:3px solid var(--s2);overflow:hidden;cursor:default;transition:box-shadow .15s}
+.ecard:hover{box-shadow:var(--sh-md)}
+.ecbody{padding:9px 11px}
+.ename{font-size:10px;font-weight:700;color:var(--tx1);line-height:1.35}
+.emeta{display:flex;flex-direction:column;gap:2px;margin-top:5px}
+.emr{display:flex;align-items:flex-start;gap:4px;font-size:8.5px;color:var(--tx3);line-height:1.4}
+.emi{width:11px;text-align:center;flex-shrink:0;font-size:9px}
+.ecfoot{padding:5px 11px 6px;background:var(--bg);border-top:1px solid var(--s1);display:flex;justify-content:space-between;align-items:center}
+.ecap-v{font-size:11px;font-weight:800;letter-spacing:-.3px}
+.ecap-l{font-size:7px;color:var(--tx3);text-transform:uppercase;letter-spacing:.3px}
+.ecprice{font-size:9px;font-weight:600;color:var(--tx2)}
+.kk-tag{display:inline-flex;align-items:center;gap:3px;padding:1px 5px;border-radius:6px;font-size:7px;font-weight:700;background:#EDE9FE;color:var(--kk);margin-top:3px}
+.no-metro-ev{border-top-color:var(--tx4)!important}
+.ph-rsb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--tx4);font-size:11px;text-align:center;padding:24px;line-height:1.5}
+
+/* ── VIEW TOGGLE ── */
+.vtabs{display:flex;gap:3px;flex-shrink:0}
+.vtab{cursor:pointer;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;color:var(--tx3);border:1.5px solid var(--s2);background:transparent;transition:all .15s;user-select:none;white-space:nowrap}
+.vtab:hover{border-color:var(--s3);color:var(--tx2)}
+.vtab.active{background:var(--tx1);border-color:var(--tx1);color:#fff}
+/* ── ESTACIONES VIEW ── */
+#view-estaciones{display:none;flex:1;overflow:hidden;min-height:0;flex-direction:row}
+#view-estaciones.active{display:flex}
+#view-agenda{display:flex;flex:1;flex-direction:column;overflow:hidden;min-height:0}
+.slsb{width:195px;flex-shrink:0;background:var(--white);border-right:1px solid var(--s2);display:flex;flex-direction:column;overflow:hidden}
+.slsb-scroll{flex:1;overflow-y:auto;padding:11px 12px 20px}
+.slsb-scroll::-webkit-scrollbar{width:3px}.slsb-scroll::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+.szpill{cursor:pointer;padding:4px 9px;border-radius:var(--r-sm);font-size:9px;color:var(--tx2);background:var(--bg);border:1.5px solid transparent;transition:all .15s;user-select:none;display:flex;align-items:center;justify-content:space-between}
+.szpill:hover{background:var(--s1)}.szpill.active{font-weight:700;background:var(--white)}
+.sort-btns{display:flex;gap:3px;flex-wrap:wrap}
+.sort-btn{cursor:pointer;padding:3px 8px;border-radius:var(--r-sm);font-size:8.5px;font-weight:500;color:var(--tx3);border:1px solid var(--s2);background:transparent;transition:all .15s;user-select:none}
+.sort-btn:hover{background:var(--s1)}.sort-btn.active{background:var(--tx1);color:#fff;border-color:var(--tx1)}
+.stn-grid-col{flex:0 0 360px;background:var(--bg);border-right:1px solid var(--s2);display:flex;flex-direction:column;overflow:hidden}
+.stn-grid-hd{padding:10px 14px 6px;background:var(--white);border-bottom:1px solid var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.stn-grid-hd-title{font-size:9px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.stn-count{font-size:9px;color:var(--tx3)}
+.stn-grid-scroll{flex:1;overflow-y:auto;padding:10px}
+.stn-grid-scroll::-webkit-scrollbar{width:3px}.stn-grid-scroll::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+.stn-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stn-card{background:var(--white);border-radius:var(--r);border:1.5px solid var(--s2);padding:9px 10px;cursor:pointer;transition:all .15s;position:relative}
+.stn-card:hover{border-color:var(--s3);box-shadow:var(--sh-sm)}
+.stn-card.selected{border-color:var(--tx1);box-shadow:0 0 0 2px rgba(17,19,24,.08)}
+.stn-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.stn-card-name{font-size:9.5px;font-weight:700;color:var(--tx1);line-height:1.25;flex:1;min-width:0;padding-right:4px}
+.stn-score-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0}
+.stn-badges{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px}
+.badge{display:inline-flex;align-items:center;padding:1.5px 6px;border-radius:8px;font-size:7.5px;font-weight:600;white-space:nowrap}
+.badge-zone{background:#F0F1F4;color:var(--tx2)}
+.badge-l1{background:#FEE2E2;color:var(--l1)}
+.badge-l2{background:#DBEAFE;color:var(--l2)}
+.stn-perfil-tags{display:flex;gap:2px;flex-wrap:wrap;margin-top:3px}
+.ptag{font-size:7px;color:var(--tx3);background:var(--bg);border:1px solid var(--s1);border-radius:5px;padding:1px 5px;white-space:nowrap}
+.stn-mini-bars{display:flex;gap:2px;margin-top:6px}
+.stn-mini-bar{flex:1;height:3px;border-radius:1.5px}
+.stn-detail{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.stn-detail-top{padding:12px 16px 10px;background:var(--white);border-bottom:1.5px solid var(--s2);flex-shrink:0}
+.stn-detail-name{font-size:18px;font-weight:800;color:var(--tx1);letter-spacing:-.5px;line-height:1.1}
+.stn-detail-meta{display:flex;align-items:center;gap:5px;margin-top:6px;flex-wrap:wrap}
+.stn-detail-scroll{flex:1;overflow-y:auto;padding:12px 16px 20px}
+.stn-detail-scroll::-webkit-scrollbar{width:3px}.stn-detail-scroll::-webkit-scrollbar-thumb{background:var(--s2);border-radius:2px}
+.atlas-hero{background:var(--white);border-radius:var(--r);border:1.5px solid var(--s2);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.atlas-score-num{font-size:44px;font-weight:800;letter-spacing:-2px;line-height:1;flex-shrink:0}
+.atlas-hero-right{flex:1}
+.atlas-score-label{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--tx3);margin-top:1px;margin-bottom:5px}
+.atlas-score-insight{font-size:9px;color:var(--tx2);line-height:1.55}
+.dim-section{background:var(--white);border-radius:var(--r);border:1.5px solid var(--s2);padding:12px 14px;margin-bottom:10px}
+.dim-title{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);margin-bottom:10px}
+.dim-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dim-row:last-child{margin-bottom:0}
+.dim-icon{font-size:11px;width:16px;text-align:center;flex-shrink:0}
+.dim-name{font-size:8.5px;color:var(--tx2);width:120px;flex-shrink:0}
+.dim-bar-wrap{flex:1;height:6px;background:var(--s1);border-radius:3px;overflow:hidden}
+.dim-bar{height:100%;border-radius:3px}
+.dim-val{font-size:8.5px;font-weight:700;width:26px;text-align:right;flex-shrink:0}
+.tractors-section{background:var(--white);border-radius:var(--r);border:1.5px solid var(--s2);padding:12px 14px;margin-bottom:10px}
+.tractor-item{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:8.5px;color:var(--tx2)}
+.tractor-dot{width:5px;height:5px;border-radius:50%;background:var(--l2);flex-shrink:0}
+.events-stn-section{background:var(--white);border-radius:var(--r);border:1.5px solid var(--s2);padding:12px 14px;margin-bottom:10px}
+.stn-ev-item{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid var(--s1)}
+.stn-ev-item:last-child{border-bottom:none;padding-bottom:0}
+.stn-ev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.stn-ev-name{font-size:8.5px;color:var(--tx1);font-weight:600;line-height:1.3}
+.stn-ev-meta{font-size:7.5px;color:var(--tx3);margin-top:1px}
+.isoc-section{background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:var(--r);border:1.5px solid #DBEAFE;padding:12px 14px;margin-bottom:10px}
+.isoc-title{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#1D4ED8;margin-bottom:5px}
+.isoc-text{font-size:8.5px;color:#374151;line-height:1.55}
+.ph-stn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px;text-align:center}
+.ph-stn-icon{font-size:30px;opacity:.3}
+.ph-stn-title{font-size:12px;font-weight:700;color:var(--tx2)}
+.ph-stn-sub{font-size:9px;color:var(--tx3);line-height:1.6;max-width:260px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-logo">
+      <div class="mdot" style="background:var(--l1)"></div>
+      <div class="mdot" style="background:var(--l2)"></div>
+    </div>
+    <h1>Metro Bilbao <span>· Agenda Marzo 2026</span></h1>
+  </div>
+  <div class="hdiv"></div>
+  <div class="vtabs">
+    <div class="vtab active" data-view="agenda">📅 Agenda</div>
+    <div class="vtab" data-view="estaciones">🏙️ Estaciones</div>
+  </div>
+  <div class="hdiv agenda-only"></div>
+  <div class="wpills agenda-only" id="week-pills"></div>
+  <div class="hdiv agenda-only"></div>
+  <div class="ttabs agenda-only" id="type-tabs">
+    <div class="ttab active" data-type="all">Todos</div>
+    <div class="ttab" data-type="cultura">🎸 Cultura</div>
+    <div class="ttab" data-type="biz">💼 Empresarial</div>
+    <div class="ttab" data-type="deporte">🏅 Deporte</div>
+    <div class="ttab" data-type="kk">🔴 Kulturklik</div>
+  </div>
+  <div class="h-right">
+    <div class="api-badge" id="api-badge" onclick="refetchAPI()">
+      <div class="api-dot"></div>
+      <span id="api-badge-txt">Kulturklik API</span>
+    </div>
+    <div class="hdiv"></div>
+    <div class="kpis">
+      <div class="kpi"><div class="kv" id="kv-e">—</div><div class="kl">Eventos</div></div>
+      <div class="kpi" style="margin-left:8px"><div class="kv" id="kv-c" style="color:var(--l1)">—</div><div class="kl">Asistentes</div></div>
+    </div>
+  </div>
+</header>
+
+<div id="view-agenda">
+<div class="daybar">
+  <span class="dbar-lbl">Día</span>
+  <div id="day-strip"></div>
+  <span class="dstat" id="dstat"></span>
+</div>
+
+<div class="main">
+
+  <!-- LEFT: FILTERS -->
+  <div class="lsb">
+    <div class="lsb-scroll">
+      <div class="fsec">
+        <div class="fs-ttl">Buscar</div>
+        <div class="srch-wrap">
+          <span class="srch-ico">⌕</span>
+          <input type="text" id="q" placeholder="Evento, lugar…"/>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Categoría</div>
+        <div id="cat-checks"></div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Franja Horaria</div>
+        <div class="time-col">
+          <div class="fpill active" data-time="all"><span>🕐</span>Todas</div>
+          <div class="fpill" data-time="mañana"><span>☀️</span>Mañana 9–14h</div>
+          <div class="fpill" data-time="tarde"><span>🌅</span>Tarde 14–20h</div>
+          <div class="fpill" data-time="noche"><span>🌙</span>Noche 20h+</div>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Línea</div>
+        <div class="line-btns">
+          <div class="lbtn active" data-line="all">Todas</div>
+          <div class="lbtn" data-line="L1">L1</div>
+          <div class="lbtn" data-line="L2">L2</div>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Kulturklik API</div>
+        <div style="font-size:8.5px;color:#5B21B6;background:#F5F3FF;border-radius:6px;padding:7px 9px;line-height:1.5">
+          🔴 Eventos en tiempo real vía <strong>api.euskadi.eus</strong>
+        </div>
+        <div class="kk-refetch" onclick="refetchAPI()">↺ Recargar semana</div>
+        <div id="kk-status"></div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Leyenda</div>
+        <div class="legend-list">
+          <div class="lgi"><div class="lgd" style="background:var(--l1)"></div>Cultura / Conciertos</div>
+          <div class="lgi"><div class="lgd" style="background:var(--l2)"></div>Empresarial</div>
+          <div class="lgi"><div class="lgd" style="background:var(--sport)"></div>Deporte</div>
+          <div class="lgi"><div class="lgd" style="background:var(--kk)"></div>Kulturklik (live)</div>
+          <div class="lgi"><div class="lgd" style="background:#C07010"></div>Mixto</div>
+          <div class="lgi"><div class="lgd" style="background:var(--tx4)"></div>Sin metro directo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER: VERTICAL METRO MAP -->
+  <div class="map-col">
+    <div class="map-hd">
+      <div class="map-hd-title">Red Metro Gran Bilbao</div>
+      <div class="map-hd-sub" id="map-hint">Haz clic en una estación</div>
+    </div>
+    <div class="map-svg-wrap">
+      <!--
+        SVG vertical layout:
+        L1 (rojo)  x=88 — vertical desde arriba
+        L2 (azul)  x=192 — vertical desde arriba
+        Interchanges San Mamés (y=258) y Abando (y=378) conectados horizontalmente
+      -->
+      <svg id="metro-svg" viewBox="0 0 280 560" preserveAspectRatio="xMidYMid meet">
+        <g id="g-lines"></g>
+        <g id="g-impact"></g>
+        <g id="g-stns"></g>
+      </svg>
+    </div>
+    <div class="chips-section">
+      <div class="chips-hd">Presión por estación</div>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: EVENTS -->
+  <div class="rsb">
+    <div class="rsb-top">
+      <div class="rsb-title" id="rsb-title">Vista semanal</div>
+      <div class="rsb-sub" id="rsb-sub">Selecciona una estación o un día</div>
+    </div>
+    <div class="ph-rsb" id="rsb-ph">
+      <div style="font-size:26px;opacity:.4">🗺️</div>
+      <div>Selecciona una estación en el mapa o un día en la barra superior.</div>
+    </div>
+    <div class="rsb-scroll" id="rsb-scroll" style="display:none">
+      <div class="cards-grid" id="cards-grid"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end #view-agenda -->
+
+<div id="view-estaciones">
+  <div class="slsb">
+    <div class="slsb-scroll">
+      <div class="fsec">
+        <div class="fs-ttl">Buscar</div>
+        <div class="srch-wrap">
+          <span class="srch-ico">⌕</span>
+          <input type="text" id="stn-q" placeholder="Estación…" oninput="SS.q=this.value.toLowerCase();renderStnGrid()"/>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Zona tarifaria</div>
+        <div id="zone-pills" style="display:flex;flex-direction:column;gap:3px"></div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Línea</div>
+        <div class="line-btns" id="sline-btns">
+          <div class="lbtn active" data-sline="all">Todas</div>
+          <div class="lbtn" data-sline="L1">L1</div>
+          <div class="lbtn" data-sline="L2">L2</div>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Ordenar por</div>
+        <div class="sort-btns" id="sort-btns">
+          <div class="sort-btn active" data-sort="score">Score ATLAS</div>
+          <div class="sort-btn" data-sort="nombre">Nombre</div>
+          <div class="sort-btn" data-sort="zona">Zona</div>
+        </div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Nota metodológica</div>
+        <div style="font-size:8.5px;color:#1D4ED8;background:#EFF6FF;border-radius:6px;padding:7px 9px;line-height:1.5;border:1px solid #BFDBFE">🧭 <strong>ATLAS Metro Intelligence</strong><br/>Cada estación analizada en <strong>5 dimensiones</strong> en isócrona peatonal de 10 min.</div>
+      </div>
+      <div class="fsec">
+        <div class="fs-ttl">Score ATLAS</div>
+        <div class="legend-list">
+          <div class="lgi"><div class="lgd" style="background:#10B981"></div>Alto (≥ 75)</div>
+          <div class="lgi"><div class="lgd" style="background:#F59E0B"></div>Medio (50–74)</div>
+          <div class="lgi"><div class="lgd" style="background:#EF4444"></div>Bajo (< 50)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="stn-grid-col">
+    <div class="stn-grid-hd">
+      <div class="stn-grid-hd-title">Red Gran Bilbao</div>
+      <div class="stn-count" id="stn-count-lbl">— estaciones</div>
+    </div>
+    <div class="stn-grid-scroll"><div class="stn-grid" id="stn-grid"></div></div>
+  </div>
+  <div class="stn-detail" id="stn-detail-col">
+    <div class="ph-stn" id="stn-ph">
+      <div class="ph-stn-icon">🗺️</div>
+      <div class="ph-stn-title">Selecciona una estación</div>
+      <div class="ph-stn-sub">Explora el perfil territorial de cada nodo según las <strong>5 dimensiones ATLAS</strong>: sociodemogrāfico, tejido económico, accesibilidad, dinámica urbana y demanda metro.</div>
+    </div>
+    <div id="stn-detail-inner" style="display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0">
+      <div class="stn-detail-top" id="stn-detail-top"></div>
+      <div class="stn-detail-scroll" id="stn-detail-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SVG_NS='http://www.w3.org/2000/svg';
+const TODAY='2026-03-09';
+const L1='#C8102E',L2='#0055A5',SPORT='#1A7F37',KK='#7C3AED';
+
+const CAT={
+  'Concierto':         {c:L1,        i:'🎸',t:'cultura'},
+  'Concierto DIY':     {c:'#D94010', i:'🎤',t:'cultura'},
+  'Fiestas Barrio':    {c:'#C07010', i:'🎉',t:'cultura'},
+  'Teatro':            {c:'#BE185D', i:'🎭',t:'cultura'},
+  'Exposición':        {c:'#0891B2', i:'🖼️',t:'cultura'},
+  'Danza':             {c:'#9333EA', i:'💃',t:'cultura'},
+  'Cine':              {c:'#475569', i:'🎬',t:'cultura'},
+  'Otros Cultural':    {c:KK,        i:'🎪',t:'cultura'},
+  'Feria Industrial':  {c:L2,        i:'🏭',t:'biz'},
+  'Congreso':          {c:'#1A6BB5', i:'🎙️',t:'biz'},
+  'Evento Innovación': {c:'#007A9E', i:'💡',t:'biz'},
+  'Feria Gastronomía': {c:'#2A8C50', i:'🍽️',t:'biz'},
+  'Feria Antigüedades':{c:'#A0720A', i:'🏺',t:'biz'},
+  'Cultura Pop':       {c:'#7733AA', i:'🎌',t:'biz'},
+  'Congreso Académico':{c:'#4455BB', i:'🔬',t:'biz'},
+  'Fútbol':            {c:SPORT,     i:'⚽',t:'deporte'},
+  'Running':           {c:'#D97706', i:'🏃',t:'deporte'},
+  'Trail':             {c:'#7C3AED', i:'🏔️',t:'deporte'},
+  'Ciclismo':          {c:'#0284C7', i:'🚴',t:'deporte'},
+  'Baloncesto':        {c:'#DC6B19', i:'🏀',t:'deporte'},
+  'Cross':             {c:'#059669', i:'🏅',t:'deporte'},
+};
+
+function d(s,n){const r=[];let dt=new Date(s);for(let i=0;i<n;i++){r.push(dt.toISOString().slice(0,10));dt.setDate(dt.getDate()+1);}return r;}
+function band(t){if(!t||t==='TBC'||t==='Varios')return 'tbc';const[h]=t.split(':').map(Number);return h<14?'mañana':h<20?'tarde':'noche';}
+function fmt(n){return n>=1000?(n/1000).toFixed(n>=5000?0:1)+'k':''+n;}
+function cap(evs){return evs.reduce((s,e)=>s+e.cap[1],0);}
+
+// ── MANUAL DB ────────────────────────────────────────────────────────
+const EV_MANUAL=[
+  {id:'e1', cat:'Concierto DIY',name:'Txintxes + Plakaje + Lumpen Club',days:['2026-03-13'],time:'19:00',venue:'Lakobra Espazioa',stn:'Deusto',cap:[50,100],price:'8€',note:'Punk/Hardcore'},
+  {id:'e2', cat:'Concierto',   name:'Delval',days:['2026-03-13'],time:'20:00',venue:'Hika Ateneo',stn:'Abando',cap:[80,150],price:'5€'},
+  {id:'e3', cat:'Concierto',   name:'Subterranean + J.M.A.',days:['2026-03-13'],time:'21:00',venue:'Nave 9 (Museo Marítimo)',stn:'San Mamés',cap:[150,300],price:'15€/17€'},
+  {id:'e4', cat:'Concierto',   name:'Da Igual',days:['2026-03-13'],time:'21:00',venue:'Stage Live',stn:'San Mamés',cap:[150,400],price:'16€'},
+  {id:'e5', cat:'Fiestas Barrio',name:'Fiestas de Deusto (Txosnas)',days:d('2026-03-13',10),time:'Varios',venue:'Txosnas Deusto',stn:'Deusto',cap:[500,2000],price:'Libre',note:'10 días'},
+  {id:'e6', cat:'Concierto',   name:'Syberia + Cordura + Green Sun Cult',days:['2026-03-14'],time:'20:00',venue:'Bilborock',stn:'Casco Viejo',cap:[150,400],price:'12€'},
+  {id:'e7', cat:'Concierto DIY',name:'Stigma + Green Sun Cult + Storage + Jidaigeki + Alkupera',days:['2026-03-14'],time:'19:30',venue:'Gaztetxe La Kelo',stn:'Santurtzi',cap:[50,150],price:'3€'},
+  {id:'e8', cat:'Concierto DIY',name:'Salidos Cordiales + Leizeak + Calzados Deportivo',days:['2026-03-14'],time:'21:00',venue:'Gaztetxe Sastraka',stn:'Zugazarte',cap:[50,150]},
+  {id:'e9', cat:'Fiestas Barrio',name:'Ziraun + Xsakara (Fiestas Deusto)',days:['2026-03-14'],time:'22:30',venue:'Txosnagunea Deusto',stn:'Deusto',cap:[500,1000],price:'Libre'},
+  {id:'e10',cat:'Concierto',   name:'Potato + Akatz',days:['2026-03-14'],time:'21:15',venue:'Kafe Antzokia',stn:'Abando',cap:[300,600],price:'14€/19€'},
+  {id:'e11',cat:'Concierto',   name:'Total Chaos + Rat-Zinger',days:['2026-03-20'],time:'20:00',venue:'D8 Sorkuntza Faktoria',stn:'San Ignazio',cap:[200,400],note:'Punk californiano'},
+  {id:'e12',cat:'Concierto',   name:'Chalart58',days:['2026-03-21'],time:'21:00',venue:'Bilborock',stn:'Casco Viejo',cap:[150,400]},
+  {id:'e13',cat:'Concierto',   name:'Empire of Disease + Frakture + Tudetuz',days:['2026-03-21'],time:'20:30',venue:'Sala Santana 27',stn:'Indautxu',cap:[150,300],price:'11€/14€'},
+  {id:'e14',cat:'Concierto DIY',name:'XpresidenteX + Sinpekado + Diskonformes',days:['2026-03-21'],time:'20:00',venue:'D8 Sorkuntza Faktoria',stn:'San Ignazio',cap:[200,400],price:'12.75€'},
+  {id:'e15',cat:'Concierto DIY',name:'The Domestics + Build me a Bomb',days:['2026-03-21'],time:'19:00',venue:'Lakobra Lokala',stn:'Deusto',cap:[50,120]},
+  {id:'e16',cat:'Concierto',   name:'Euskal Bastards + Los Devizio + Doble Fuerza',days:['2026-03-28'],time:'18:00',venue:'La Nube Café Teatro',stn:'Santutxu',cap:[100,200],price:'12€/15€'},
+  {id:'e17',cat:'Concierto',   name:'Rebeliom do Inframundo',days:['2026-03-28'],time:'TBC',venue:'D8 Sorkuntza Faktoria',stn:'San Ignazio',cap:[200,400]},
+  {id:'e18',cat:'Concierto',   name:'Thy Catafalque',days:['2026-03-29'],time:'TBC',venue:'D8 Sorkuntza Faktoria',stn:'San Ignazio',cap:[200,400],price:'26.50€'},
+  {id:'b1', cat:'Feria Industrial',  name:'BIEMH 2026 — 33ª Bienal Máquina-Herramienta',days:d('2026-03-02',5),time:'09:30',venue:'BEC — 6 pabellones',stn:'Ansio',cap:[30000,39000],note:'1.503 empresas · 34 países'},
+  {id:'b2', cat:'Congreso',          name:'Iberquimia Bilbao 2026',days:['2026-03-12'],time:'09:00',venue:'BEC',stn:'Ansio',cap:[300,500],price:'Gratuito'},
+  {id:'b3', cat:'Evento Innovación', name:'TEDxUDeusto "Caos" — 10ª edición',days:['2026-03-13'],time:'17:00',venue:'Palacio Euskalduna',stn:'Moyua',cap:[600,630],note:'Sold out'},
+  {id:'b4', cat:'Feria Gastronomía', name:'Gustoko 2026 — 6ª Feria Gastronomía',days:d('2026-03-13',3),time:'10:00',venue:'BEC — Pabellón 3',stn:'Ansio',cap:[10000,15000]},
+  {id:'b5', cat:'Feria Antigüedades',name:'53 Desembalaje Bilbao',days:d('2026-03-14',2),time:'10:00',venue:'BEC — Pabellón 6',stn:'Ansio',cap:[5000,6000]},
+  {id:'b6', cat:'Cultura Pop',       name:'Japan Weekend Bilbao XXII',days:['2026-03-21'],time:'TBC',venue:'BEC — Pabellón 5',stn:'Ansio',cap:[5000,15000]},
+  {id:'b7', cat:'Congreso Académico',name:'XXXII Congreso Derecho y Genoma Humano',days:d('2026-03-24',2),time:'09:15',venue:'Bizkaia Aretoa',stn:'Abando',cap:[300,500]},
+  {id:'s1', cat:'Trail',      name:'Trail Artxanda (13–22 km)',days:['2026-03-01'],time:'09:30',venue:'Monte Artxanda',stn:null,cap:[400,600],note:'Funicular Artxanda'},
+  {id:'s2', cat:'Running',    name:'Carrera Popular Barakaldo',days:['2026-03-01'],time:'11:15',venue:'Centro Barakaldo',stn:'Barakaldo',cap:[800,1500]},
+  {id:'s3', cat:'Fútbol',     name:'Athletic Club vs FC Barcelona · LaLiga J27',days:['2026-03-07'],time:'20:00',venue:'San Mamés',stn:'San Mamés',cap:[53300,53300],note:'0–1 · Sold out'},
+  {id:'s4', cat:'Running',    name:'II 10K Internacional de Bilbao',days:['2026-03-07'],time:'18:00',venue:'Arenal → Casco Viejo',stn:'Casco Viejo',cap:[3000,4000]},
+  {id:'s5', cat:'Trail',      name:'Trail Morga (10–20 km)',days:['2026-03-07'],time:'09:00',venue:'Morga (Bizkaia)',stn:null,cap:[300,600],note:'Bizkaibus Gernika'},
+  {id:'s6', cat:'Ciclismo',   name:'Occident Bilbao-Bilbao · 37ª Marcha Cicloturista',days:['2026-03-15'],time:'08:00',venue:'Puente Deusto → Gran Vía',stn:'Deusto',cap:[3000,6000]},
+  {id:'s7', cat:'Baloncesto', name:'Surne Bilbao Basket vs Breogán · Liga Endesa J22',days:['2026-03-14'],time:'21:00',venue:'Bilbao Arena (Miribilla)',stn:'San Mamés',cap:[5000,7000]},
+  {id:'s8', cat:'Cross',      name:'Cross Atletismo Etxebarri',days:['2026-03-15'],time:'TBC',venue:'Etxebarri',stn:'Etxebarri',cap:[300,600]},
+  {id:'s9', cat:'Baloncesto', name:'Surne Bilbao Basket vs Unicaja · Liga Endesa J23',days:['2026-03-21'],time:'20:00',venue:'Bilbao Arena (Miribilla)',stn:'San Mamés',cap:[5000,7000]},
+  {id:'s10',cat:'Fútbol',     name:'Athletic Club vs Real Betis · LaLiga J28',days:['2026-03-22'],time:'18:30',venue:'San Mamés',stn:'San Mamés',cap:[53300,53300]},
+  {id:'s11',cat:'Trail',      name:'Enkarterri Extrem Trail (60 km)',days:['2026-03-28'],time:'TBC',venue:'Zaramillo (Encartaciones)',stn:null,cap:[300,800],note:'Bizkaibus Encartaciones'},
+];
+EV_MANUAL.forEach(e=>{e.type=CAT[e.cat]?.t||'biz';e.band=band(e.time||'');e.fromAPI=false;e.price=e.price||'—';e.note=e.note||'';});
+
+// ── KULTURKLIK API ───────────────────────────────────────────────────
+const KK_MUNIS=[
+  {prov:48,id:11,name:'Bilbao',     stn:'Abando'},
+  {prov:48,id:13,name:'Barakaldo',  stn:'Ansio'},
+  {prov:48,id:84,name:'Santurtzi',  stn:'Santurtzi'},
+  {prov:48,id:75,name:'Portugalete',stn:'Zugazarte'},
+];
+let apiEvents=[];
+let apiLoaded=new Set();
+
+function setApiState(st,msg){
+  const b=document.getElementById('api-badge'),t=document.getElementById('api-badge-txt');
+  b.className='api-badge '+st;
+  t.textContent=st==='loading'?'Cargando…':st==='ok'?`Kulturklik · ${apiEvents.length} ev`:st==='error'?'API · sin datos':'Kulturklik API';
+  const ks=document.getElementById('kk-status');if(ks)ks.textContent=msg||'';
+}
+function jsonpFetch(url){
+  return new Promise(resolve=>{
+    const fn='kk_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+    let done=false;
+    const timer=setTimeout(()=>{if(!done){done=true;delete window[fn];resolve(null);}},9000);
+    window[fn]=data=>{if(!done){done=true;clearTimeout(timer);delete window[fn];resolve(data);}};
+    const s=document.createElement('script');
+    s.src=url+(url.includes('?')?'&':'?')+'_callback='+fn+'&_='+Date.now();
+    s.onerror=()=>{if(!done){done=true;clearTimeout(timer);delete window[fn];resolve(null);}};
+    document.head.appendChild(s);
+    setTimeout(()=>s.remove&&s.remove(),14000);
+  });
+}
+function mapKKType(ev){
+  const raw=[ev.eventType,ev.thematicArea,ev.type,ev.category].filter(Boolean).join(' ').toLowerCase();
+  if(/concierto|musica|music|concert/i.test(raw))return 'Concierto';
+  if(/teatro|theater/i.test(raw))return 'Teatro';
+  if(/exposici|exhibit/i.test(raw))return 'Exposición';
+  if(/danza|dance/i.test(raw))return 'Danza';
+  if(/cine|film|movie/i.test(raw))return 'Cine';
+  return 'Otros Cultural';
+}
+function mapKKEvent(item,muni,dateStr){
+  const name=item.nameEs||item.name||item.titulo||'Evento cultural';
+  const time=item.startTime||item.horaInicio||'TBC';
+  const venue=item.placeName||item.lugar||muni.name;
+  let stn=muni.stn;
+  const vl=venue.toLowerCase();
+  if(/bilborock/i.test(vl))stn='Casco Viejo';
+  else if(/kafe antzokia|euskalduna/i.test(vl))stn='Abando';
+  else if(/miribilla|arena/i.test(vl))stn='San Mamés';
+  else if(/deusto/i.test(vl))stn='Deusto';
+  const cat=mapKKType(item);
+  return{id:'kk_'+(item.id||Math.random().toString(36).slice(2)),
+    cat,type:'cultura',name,days:[dateStr],time:time.slice?time.slice(0,5):time,
+    venue,stn,cap:[30,300],price:item.price||'—',note:'',
+    band:band(time),fromAPI:true,kkUrl:item.url||'https://kulturklik.euskadi.eus',source:'Kulturklik'};
+}
+async function fetchWeekAPI(wi){
+  const days=wDays(wi);
+  setApiState('loading','Conectando con api.euskadi.eus…');
+  let done=0,total=days.length*KK_MUNIS.length;
+  for(const day of days){
+    const[y,m,d2]=day.split('-').map(Number);
+    for(const muni of KK_MUNIS){
+      const key=`${y}-${m}-${d2}-${muni.id}`;
+      if(!apiLoaded.has(key)){
+        apiLoaded.add(key);
+        const url=`https://api.euskadi.eus/culture/events/v1.0/events/byDate/${y}/${m}/${d2}/byMunicipality/${muni.prov}/${muni.id}`;
+        const data=await jsonpFetch(url);
+        if(data){
+          const items=data.items||data.events||(Array.isArray(data)?data:[]);
+          const ds=`${y}-${String(m).padStart(2,'0')}-${String(d2).padStart(2,'0')}`;
+          items.forEach(item=>{
+            const ev=mapKKEvent(item,muni,ds);
+            if(!apiEvents.some(e=>e.name===ev.name&&e.days[0]===ds))apiEvents.push(ev);
+          });
+        }
+      }
+      done++;
+      if(done%3===0){const ks=document.getElementById('kk-status');if(ks)ks.textContent=`${done}/${total} consultas…`;render(true);}
+      await new Promise(r=>setTimeout(r,100));
+    }
+  }
+  const count=apiEvents.filter(e=>days.some(d=>e.days.includes(d))).length;
+  setApiState(count>0?'ok':'error',count>0?`${count} eventos de Kulturklik`:'Sin datos para esta semana (fechas futuras)');
+  render();
+}
+window.refetchAPI=()=>{
+  const days=wDays(S.week);
+  days.forEach(day=>{const[y,m,d2]=day.split('-').map(Number);KK_MUNIS.forEach(muni=>apiLoaded.delete(`${y}-${m}-${d2}-${muni.id}`));});
+  fetchWeekAPI(S.week);
+};
+function allEvents(){return[...EV_MANUAL,...apiEvents];}
+
+// ── STATIONS — VERTICAL SVG ──────────────────────────────────────────
+// viewBox: 0 0 280 560
+// L1 x=88, L2 x=192
+// Interchange y-coords: San Mamés=258, Abando=378
+const X1=88,X2=192; // line x-positions
+const STNS=[
+  // L1 (left spine)
+  {id:'etxebarri', name:'Etxebarri',   lines:['L1'], x:X1, y:52,  lbl:'left'},
+  {id:'sanignazio',name:'San Ignazio', lines:['L1'], x:X1, y:112, lbl:'left'},
+  {id:'deusto',    name:'Deusto',      lines:['L1'], x:X1, y:178, lbl:'left'},
+  {id:'sanmames',  name:'San Mamés',   lines:['L1','L2'], xchg:true, x:X1, x2:X2, y:258, lbl:'center'},
+  {id:'moyua',     name:'Moyua',       lines:['L1'], x:X1, y:318, lbl:'left'},
+  {id:'abando',    name:'Abando',      lines:['L1','L2'], xchg:true, x:X1, x2:X2, y:378, lbl:'center'},
+  {id:'cascoviejo',name:'Casco Viejo', lines:['L1'], x:X1, y:438, lbl:'left'},
+  {id:'santutxu',  name:'Santutxu',    lines:['L1'], x:X1, y:510, lbl:'left'},
+  // L2 (right spine) — non-interchange only
+  {id:'barakaldo', name:'Barakaldo',   lines:['L2'], x:X2, y:52,  lbl:'right'},
+  {id:'santurtzi', name:'Santurtzi',   lines:['L2'], x:X2, y:118, lbl:'right'},
+  {id:'zugazarte', name:'Zugazarte',   lines:['L2'], x:X2, y:188, lbl:'right'},
+  {id:'ansio',     name:'Ansio · BEC', lines:['L2'], x:X2, y:228, lbl:'right'},
+  {id:'indautxu',  name:'Indautxu',    lines:['L2'], x:X2, y:338, lbl:'right'},
+];
+const N2ID={
+  'San Ignazio':'sanignazio','Deusto':'deusto','San Mamés':'sanmames','Moyua':'moyua',
+  'Abando':'abando','Casco Viejo':'cascoviejo','Santutxu':'santutxu',
+  'Santurtzi':'santurtzi','Zugazarte':'zugazarte','Ansio':'ansio','Indautxu':'indautxu',
+  'Barakaldo':'barakaldo','Etxebarri':'etxebarri',
+};
+const LINE_STNS={
+  L1:['etxebarri','sanignazio','deusto','sanmames','moyua','abando','cascoviejo','santutxu'],
+  L2:['barakaldo','santurtzi','zugazarte','ansio','sanmames','indautxu','abando'],
+};
+
+const WEEKS=[{l:'1–8 Mar',s:'2026-03-01'},{l:'9–15 Mar',s:'2026-03-09'},{l:'16–22 Mar',s:'2026-03-16'},{l:'23–29 Mar',s:'2026-03-23'}];
+const DN=['L','M','X','J','V','S','D'];
+function wDays(wi){return Array.from({length:7},(_,i)=>{const dt=new Date(WEEKS[wi].s);dt.setDate(dt.getDate()+i);return dt.toISOString().slice(0,10);});}
+
+const S={week:1,day:null,stn:null,time:'all',line:'all',type:'all',cats:new Set(Object.keys(CAT)),q:''};
+
+function filt(days){
+  const ds=new Set(days||wDays(S.week));
+  return allEvents().filter(e=>{
+    if(!e.days.some(d=>ds.has(d)))return false;
+    if(!S.cats.has(e.cat))return false;
+    if(S.type!=='all'){if(S.type==='kk'&&!e.fromAPI)return false;if(S.type!=='kk'&&e.type!==S.type)return false;}
+    if(S.time!=='all'&&e.band!==S.time)return false;
+    if(S.line!=='all'&&e.stn&&!LINE_STNS[S.line]?.includes(N2ID[e.stn]))return false;
+    if(S.q){const q=S.q.toLowerCase();if(![e.name,e.venue,e.stn||''].some(x=>x.toLowerCase().includes(q)))return false;}
+    return true;
+  });
+}
+function gEvs(){return filt(S.day?[S.day]:null);}
+function gStnEvs(id){return gEvs().filter(e=>e.stn&&N2ID[e.stn]===id);}
+function domColor(evs){
+  if(!evs.length)return '#BFC5D0';
+  const types=new Set(evs.map(e=>e.fromAPI?'kk':e.type));
+  if(types.size>1)return '#C07010';
+  const t=[...types][0];
+  return t==='kk'?KK:t==='biz'?L2:t==='deporte'?SPORT:L1;
+}
+
+// SVG helpers
+function mkEl(tag,a){const e=document.createElementNS(SVG_NS,tag);for(const[k,v]of Object.entries(a))e.setAttribute(k,v);return e;}
+function mkTx(s,a){const e=mkEl('text',a);e.textContent=s;return e;}
+const FF="'Inter',sans-serif";
+
+function renderLines(){
+  const g=document.getElementById('g-lines');g.innerHTML='';
+
+  // L1 vertical line
+  g.appendChild(mkEl('line',{x1:X1,y1:28,x2:X1,y2:532,stroke:L1,'stroke-width':4,opacity:.9,'stroke-linecap':'round'}));
+  // L2 vertical line
+  g.appendChild(mkEl('line',{x1:X2,y1:28,x2:X2,y2:400,stroke:L2,'stroke-width':4,opacity:.9,'stroke-linecap':'round'}));
+
+  // Continuation arrows
+  [[X1,18,'▲'],[X1,545,'▼'],[X2,18,'▲'],[X2,413,'▼']].forEach(([x,y,t])=>
+    g.appendChild(mkTx(t,{x,y,'font-size':9,fill:'#D1D5DE','text-anchor':'middle','font-family':FF})));
+
+  // Interchange horizontal connectors
+  [[258,'San Mamés'],[378,'Abando']].forEach(([y,])=>{
+    g.appendChild(mkEl('line',{x1:X1,y1:y,x2:X2,y2:y,stroke:'#D1D5DE','stroke-width':1.5,'stroke-dasharray':'4,3',opacity:.9}));
+  });
+
+  // Line badges — top of each spine
+  [[X1,26,'L1',L1],[X2,26,'L2',L2]].forEach(([x,y,l,c])=>{
+    g.appendChild(mkEl('rect',{x:x-13,y:y-9,width:26,height:14,rx:4,fill:c}));
+    g.appendChild(mkTx(l,{x,y:y+2.5,'font-size':7.5,'font-weight':700,fill:'#fff','text-anchor':'middle','font-family':FF}));
+  });
+}
+
+function renderStations(){
+  const gs=document.getElementById('g-stns'),gi=document.getElementById('g-impact');
+  gs.innerHTML='';gi.innerHTML='';
+
+  STNS.forEach(stn=>{
+    const evs=gStnEvs(stn.id),has=evs.length>0,cv=cap(evs),col=domColor(evs),sel=S.stn===stn.id;
+    const cx=stn.x,cy=stn.y;
+    const r=has?Math.max(10,Math.min(28,7+Math.sqrt(cv)*.72)):0;
+    const kkEvs=evs.filter(e=>e.fromAPI);
+
+    // Impact aura
+    if(has){
+      if(kkEvs.length)gi.appendChild(mkEl('circle',{cx,cy,r:r+7,fill:'none',stroke:KK,'stroke-width':1.5,opacity:.25,'stroke-dasharray':'3,3'}));
+      gi.appendChild(mkEl('circle',{cx,cy,r:r+3,fill:col,opacity:.06}));
+      gi.appendChild(mkEl('circle',{cx,cy,r,fill:col,opacity:.14,stroke:col,'stroke-width':1.5}));
+      // Badge: top-right of bubble
+      const bx=cx+r*.7,by=cy-r*.7;
+      gi.appendChild(mkEl('circle',{cx:bx,cy:by,r:7.5,fill:col,stroke:'#fff','stroke-width':1.5}));
+      gi.appendChild(mkTx(''+evs.length,{x:bx,y:by+3.5,'font-size':7.5,'font-weight':700,fill:'#fff','text-anchor':'middle','font-family':FF}));
+    }
+
+    // Interchange connector dot pair
+    if(stn.xchg){
+      // Draw a second dot on L2
+      gs.appendChild(mkEl('circle',{cx:stn.x2,cy:cy,r:7,fill:'#fff',stroke:sel?(has?col:'#4A5263'):(has?col:'#D1D5DE'),'stroke-width':2,style:'cursor:pointer'}));
+      gs.appendChild(mkEl('circle',{cx:stn.x2,cy:cy,r:4.5,fill:sel?(has?col:'#4A5263'):(has?'#fff':'#F0F1F4'),style:'cursor:pointer'}));
+      const d2=mkEl('circle',{cx:stn.x2,cy:cy,r:7,fill:'transparent',style:'cursor:pointer'});
+      d2.addEventListener('click',()=>clickStn(stn.id));gs.appendChild(d2);
+    }
+
+    // Main station dot
+    gs.appendChild(mkEl('circle',{cx,cy,r:8,fill:'#fff',stroke:'transparent'}));
+    const dot=mkEl('circle',{cx,cy,r:stn.xchg?7:5.5,
+      fill:sel?(has?col:'#4A5263'):'#fff',
+      stroke:sel?(has?col:'#4A5263'):(has?col:'#D1D5DE'),
+      'stroke-width':sel?2.5:2,style:'cursor:pointer'});
+    dot.addEventListener('click',()=>clickStn(stn.id));
+    gs.appendChild(dot);
+
+    // Labels
+    const fw=has||sel?600:400;
+    const fc=sel?'#111':(has?'#111':'#BFC5D0');
+
+    if(stn.lbl==='left'){
+      // Label to the LEFT of L1
+      const lb=mkTx(stn.name,{x:cx-13,y:cy+3.5,'font-size':9,'font-weight':fw,fill:fc,'text-anchor':'end','font-family':FF,style:'cursor:pointer'});
+      lb.addEventListener('click',()=>clickStn(stn.id));gs.appendChild(lb);
+    } else if(stn.lbl==='right'){
+      // Label to the RIGHT of L2
+      const lb=mkTx(stn.name,{x:cx+13,y:cy+3.5,'font-size':9,'font-weight':fw,fill:fc,'text-anchor':'start','font-family':FF,style:'cursor:pointer'});
+      lb.addEventListener('click',()=>clickStn(stn.id));gs.appendChild(lb);
+    } else {
+      // Interchange: label CENTERED between spines
+      const midX=(X1+X2)/2;
+      const rect=mkEl('rect',{x:midX-28,y:cy-9,width:56,height:14,rx:4,
+        fill:sel?(has?col+'22':'#F0F1F4'):(has?col+'15':'#F7F8FA'),
+        stroke:sel?col:(has?col+'40':'#E4E6EB'),'stroke-width':1});
+      gs.appendChild(rect);
+      const lb=mkTx(stn.name,{x:midX,y:cy+3.5,'font-size':8,'font-weight':700,
+        fill:sel?'#111':(has?col:'#9098A9'),'text-anchor':'middle','font-family':FF,style:'cursor:pointer'});
+      lb.addEventListener('click',()=>clickStn(stn.id));
+      gs.appendChild(lb);
+      // Lines tag below
+      gs.appendChild(mkTx('L1 · L2',{x:midX,y:cy+17,'font-size':6.5,fill:'#BFC5D0','text-anchor':'middle','font-family':FF}));
+    }
+  });
+}
+
+function renderWeekPills(){
+  const el=document.getElementById('week-pills');
+  el.innerHTML=WEEKS.map((w,i)=>`<div class="wpill${i===S.week?' active':''}" data-wi="${i}">${w.l}</div>`).join('');
+  el.querySelectorAll('.wpill').forEach(p=>p.addEventListener('click',()=>{
+    const wi=+p.dataset.wi;if(wi!==S.week){S.week=wi;S.day=null;S.stn=null;render();fetchWeekAPI(wi);}
+  }));
+}
+
+function renderDayStrip(){
+  const el=document.getElementById('day-strip');
+  const days=wDays(S.week);
+  el.innerHTML=days.map((day,i)=>{
+    const evs=allEvents().filter(e=>e.days.includes(day));
+    const has=evs.length>0,sel=S.day===day,today=day===TODAY;
+    const pips=[evs.some(e=>e.type==='biz')?`<div class="pip" style="background:${L2}"></div>`:'',
+                evs.some(e=>e.type==='cultura')?`<div class="pip" style="background:${L1}"></div>`:'',
+                evs.some(e=>e.type==='deporte')?`<div class="pip" style="background:${SPORT}"></div>`:'',
+                evs.some(e=>e.fromAPI)?`<div class="pip" style="background:${KK}"></div>`:''].join('');
+    return`<div class="dbtn${has?' has':''}${sel?' active':''}${today?' today':''}" data-d="${day}">
+      <div class="dn">${today?'HOY':DN[i]}</div><div class="dnum">${+day.slice(8)}</div><div class="dpips">${pips}</div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('.dbtn').forEach(b=>b.addEventListener('click',()=>{S.day=S.day===b.dataset.d?null:b.dataset.d;S.stn=null;render();}));
+}
+
+function renderCatChecks(){
+  const el=document.getElementById('cat-checks');
+  const cnt={};allEvents().filter(e=>e.days.some(d=>wDays(S.week).includes(d))).forEach(e=>cnt[e.cat]=(cnt[e.cat]||0)+1);
+  const groups=[
+    {lbl:'💼 Empresarial',cats:Object.entries(CAT).filter(([,v])=>v.t==='biz').map(([k])=>k)},
+    {lbl:'🎸 Cultura',    cats:Object.entries(CAT).filter(([,v])=>v.t==='cultura').map(([k])=>k)},
+    {lbl:'🏅 Deporte',    cats:Object.entries(CAT).filter(([,v])=>v.t==='deporte').map(([k])=>k)},
+  ];
+  el.innerHTML=groups.map(g=>{
+    const cats=g.cats.filter(c=>cnt[c]);if(!cats.length)return '';
+    return`<div class="cat-ghd">${g.lbl}</div>`+
+      cats.map(cat=>{const m=CAT[cat],on=S.cats.has(cat);
+        return`<div class="cb-row${on?' on':''}" data-cat="${cat}">
+          <div class="cb-box"><span class="cb-chk">✓</span></div>
+          <span class="cb-ico">${m.i}</span><span class="cb-lbl">${cat}</span>
+          <span class="cb-cnt">${cnt[cat]||0}</span>
+        </div>`;}).join('');
+  }).join('');
+  el.querySelectorAll('.cb-row').forEach(r=>r.addEventListener('click',()=>{
+    const c=r.dataset.cat;S.cats.has(c)?S.cats.delete(c):S.cats.add(c);S.stn=null;render();
+  }));
+}
+
+function renderChips(){
+  const stns=STNS.map(s=>({s,evs:gStnEvs(s.id)})).filter(x=>x.evs.length>0).sort((a,b)=>cap(b.evs)-cap(a.evs));
+  const el=document.getElementById('chips');
+  el.innerHTML=stns.length?stns.map(({s,evs})=>{
+    const v=cap(evs),col=domColor(evs),sel=S.stn===s.id;
+    const kkN=evs.filter(e=>e.fromAPI).length;
+    return`<div class="chip" onclick="clickStn('${s.id}')" style="${sel?`border-color:${col};background:${col}08;box-shadow:0 0 0 2px ${col}20`:''}">
+      <div class="chip-left">
+        <div class="chip-v" style="color:${col}">${fmt(v)}</div>
+        <div>
+          <div class="chip-nm">${s.name}${kkN?` <span style="color:${KK};font-size:7px">+${kkN}🔴</span>`:''}</div>
+          <div class="chip-s">${evs.length} eventos · ${s.lines.join('·')}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join(''):`<div style="font-size:8px;color:#9098A9;padding:2px">Sin estaciones activas.</div>`;
+}
+
+function renderSidebar(){
+  const evs=S.stn?gStnEvs(S.stn):gEvs();
+  const stn=S.stn?STNS.find(s=>s.id===S.stn):null;
+  let title,sub;
+  if(stn){title=stn.name;sub=`Metro ${stn.lines.join('·')}${stn.xchg?' · Intercambio':''}${S.day?` · ${+S.day.slice(8)} Mar`:' · Semana'}`;}
+  else if(S.day){const dd=new Date(S.day);title=`${['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][dd.getDay()]} ${dd.getDate()} Marzo`;sub='Todos los eventos del día';}
+  else{title=`Semana ${WEEKS[S.week].l}`;sub='Selecciona estación o día';}
+  document.getElementById('rsb-title').textContent=title;
+  document.getElementById('rsb-sub').textContent=sub;
+  const ph=document.getElementById('rsb-ph'),sc=document.getElementById('rsb-scroll');
+  if(!evs.length){ph.style.display='flex';sc.style.display='none';return;}
+  ph.style.display='none';sc.style.display='block';
+  const sorted=[...evs].sort((a,b)=>a.band==='tbc'?1:b.band==='tbc'?-1:a.time.localeCompare(b.time));
+  const BI={mañana:'☀️',tarde:'🌅',noche:'🌙',tbc:'⏳'};
+  document.getElementById('cards-grid').innerHTML=sorted.map(e=>{
+    const m=CAT[e.cat]||{c:KK,i:'🎪'};
+    const col=e.fromAPI?KK:m.c;
+    const noMetro=!e.stn;
+    const bl=(BI[e.band]||'⏳')+(e.time&&e.time!=='TBC'&&e.time!=='Varios'?' · '+e.time:'');
+    return`<div class="ecard${e.fromAPI?' kk-card':''}${noMetro?' no-metro-ev':''}" style="border-top-color:${noMetro?'#BFC5D0':col}">
+      <div class="ecbody">
+        <div class="ename">${e.name}</div>
+        ${e.fromAPI?`<div class="kk-tag">🔴 Kulturklik API</div>`:''}
+        <div class="emeta">
+          <div class="emr"><span class="emi">${m.i}</span><span style="color:${col};font-weight:600">${e.cat}</span></div>
+          <div class="emr"><span class="emi">🕐</span>${bl}</div>
+          <div class="emr"><span class="emi">📍</span>${e.venue}</div>
+          ${!S.stn&&e.stn?`<div class="emr"><span class="emi">🚇</span>${e.stn}</div>`:''}
+          ${noMetro?`<div class="emr"><span class="emi">⚠️</span><span style="color:#9098A9">Sin metro directo</span></div>`:''}
+          ${e.note?`<div class="emr"><span class="emi">💬</span>${e.note}</div>`:''}
+          ${e.fromAPI&&e.kkUrl?`<div class="emr"><span class="emi">🔗</span><a href="${e.kkUrl}" target="_blank" style="color:${KK};font-size:8px">Ver en Kulturklik</a></div>`:''}
+        </div>
+      </div>
+      <div class="ecfoot">
+        <div><div class="ecap-v" style="color:${noMetro?'#9098A9':col}">${fmt(e.cap[0])}–${fmt(e.cap[1])}</div><div class="ecap-l">Asistentes est.</div></div>
+        <div class="ecprice">${e.price&&e.price!=='—'?e.price:''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateKPIs(){
+  const evs=gEvs(),de=S.day?filt([S.day]):evs;
+  document.getElementById('kv-e').textContent=evs.length;
+  document.getElementById('kv-c').textContent='~'+fmt(cap(evs));
+  document.getElementById('dstat').innerHTML=S.day?`<b>${de.length}</b> eventos · <b>~${fmt(cap(de))}</b> asist.`:`<b>${evs.length}</b> eventos esta semana`;
+}
+
+function render(partial=false){
+  if(!partial){renderWeekPills();renderDayStrip();renderCatChecks();}
+  renderLines();renderStations();renderChips();renderSidebar();updateKPIs();
+  document.getElementById('map-hint').textContent=S.stn?`Estación: ${STNS.find(s=>s.id===S.stn)?.name}`:'Haz clic en una estación';
+}
+
+window.clickStn=id=>{S.stn=S.stn===id?null:id;renderStations();renderChips();renderSidebar();};
+document.querySelectorAll('.ttab').forEach(p=>p.addEventListener('click',()=>{
+  document.querySelectorAll('.ttab').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');S.type=p.dataset.type;S.stn=null;render();
+}));
+document.querySelectorAll('.fpill').forEach(p=>p.addEventListener('click',()=>{
+  document.querySelectorAll('.fpill').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');S.time=p.dataset.time;S.stn=null;render();
+}));
+document.querySelectorAll('.lbtn').forEach(p=>p.addEventListener('click',()=>{
+  document.querySelectorAll('.lbtn').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');S.line=p.dataset.line;S.stn=null;render();
+}));
+document.getElementById('q').addEventListener('input',e=>{S.q=e.target.value.trim();S.stn=null;render();});
+
+render();
+setApiState('loading','Iniciando…');
+fetchWeekAPI(S.week);
+
+// ── STATION PROFILES DATA ─────────────────────────────────────────────
+// Full ATLAS profile per station
+// demo, eco, mov, din, dem → 0–100 dimension scores
+// pop: population in 10-min isochrone
+// sex: {m, f} %
+// age: {0_14, 15_29, 30_64, 65p} %
+// renta: {alta, media, baja} %
+// eco: {retail, restauracion, hoteles, airbnb, parking, oficinas, industria, hospitales, educacion}
+// pasajeros_dia: avg daily boardings
+const ZONE_META={
+  A:{label:'Zona A',color:'#6366F1',desc:'Bilbao centro'},
+  B0:{label:'Zona B0',color:'#8B5CF6',desc:'Basauri'},
+  B1:{label:'Zona B1',color:'#0EA5E9',desc:'Getxo / Ría'},
+  B2:{label:'Zona B2',color:'#F59E0B',desc:'Margen izquierda'},
+  C:{label:'Zona C',color:'#10B981',desc:'Costa / Uribe'},
+};
+
+const STN_DATA=[
+  // ── ZONA A ──────────────────────────────────────────────────────────
+  {id:'abando', name:'Abando', zone:'A', lines:['L1','L2'],
+   pop:18400, sex:{m:47,f:53}, age:{a:12,b:18,c:52,d:18}, renta:{alta:28,media:48,baja:24},
+   eco:{retail:42,restauracion:38,hoteles:12,airbnb:180,parking:8,oficinas:65,industria:2,hospitales:0,educacion:3},
+   pasajeros_dia:28500,
+   perfil:['🚉 Intermodal','🛍️ Comercial','🏢 Empresarial'],
+   tractors:['RENFE / Euskotren / Tram (intercambiador principal)','Gran Vía — eje comercial premium','Torre Iberdrola (42 plantas, 800+ empleados)','Museo Guggenheim (10 min andando)'],
+   scores:{demo:85,eco:92,mov:96,din:82,dem:95}, atlasScore:90,
+   insight:'Principal nodo intermodal de Bilbao. Máxima conectividad y actividad comercial. Saturación frecuente en hora punta y en eventos de Casco Viejo.'},
+
+  {id:'moyua', name:'Moyua', zone:'A', lines:['L1'],
+   pop:14200, sex:{m:46,f:54}, age:{a:11,b:16,c:54,d:19}, renta:{alta:32,media:46,baja:22},
+   eco:{retail:35,restauracion:30,hoteles:9,airbnb:140,parking:6,oficinas:58,industria:0,hospitales:0,educacion:2},
+   pasajeros_dia:14800,
+   perfil:['🛍️ Comercial','🏛️ Cultural','🏢 Oficinas'],
+   tractors:['Plaza Moyua — Gran Vía km 0','Hotel Carlton (5★, referencia histórica)','Sedes corporativas de banca y seguros','Museo de Bellas Artes (8 min)'],
+   scores:{demo:80,eco:86,mov:84,din:75,dem:80}, atlasScore:81,
+   insight:'Corazón de la Gran Vía bilbaína. Alta concentración de sedes financieras y retail premium. Patrón muy definido L-V laboral.'},
+
+  {id:'indautxu', name:'Indautxu', zone:'A', lines:['L1','L2'],
+   pop:16800, sex:{m:47,f:53}, age:{a:13,b:19,c:51,d:17}, renta:{alta:22,media:52,baja:26},
+   eco:{retail:28,restauracion:32,hoteles:5,airbnb:95,parking:5,oficinas:22,industria:1,hospitales:0,educacion:4},
+   pasajeros_dia:12400,
+   perfil:['🏘️ Residencial','🎭 Eventos','🛍️ Comercial'],
+   tractors:['Bilbao Arena (capacidad 7.000 — basket, conciertos)','Sala Santana 27 (aforo 800)','Campo Volantin (paseo ría)'],
+   scores:{demo:75,eco:72,mov:80,din:78,dem:75}, atlasScore:76,
+   insight:'Barrio residencial-comercial con dos equipamientos de eventos relevantes. Picos de demanda intensos en noches de concierto o partido de basket.'},
+
+  {id:'sanmames', name:'San Mamés', zone:'A', lines:['L1','L2'],
+   pop:13600, sex:{m:48,f:52}, age:{a:12,b:20,c:52,d:16}, renta:{alta:18,media:50,baja:32},
+   eco:{retail:18,restauracion:42,hoteles:6,airbnb:210,parking:10,oficinas:14,industria:3,hospitales:1,educacion:5},
+   pasajeros_dia:22000,
+   perfil:['⚽ Deportivo','🎭 Eventos masivos','🎶 Conciertos'],
+   tractors:['Estadio San Mamés (53.300 aforo — Athletic Club)','Bilbao Arena (7.000 aforo)','Palacio Euskalduna (congresos y ópera)','BilbaoTren (cercanías)'],
+   scores:{demo:72,eco:78,mov:88,din:96,dem:88}, atlasScore:84,
+   insight:'Estación de máximo impacto puntual. Concentración y dispersión extrema los días de partido o concierto. Gestión operativa crítica.'},
+
+  {id:'deusto', name:'Deustu', zone:'A', lines:['L1'],
+   pop:17200, sex:{m:46,f:54}, age:{a:10,b:28,c:46,d:16}, renta:{alta:15,media:48,baja:37},
+   eco:{retail:14,restauracion:36,hoteles:2,airbnb:75,parking:2,oficinas:10,industria:2,hospitales:0,educacion:12},
+   pasajeros_dia:9800,
+   perfil:['🎓 Universitario','🎸 Cultura DIY','🍺 Ocio nocturno'],
+   tractors:['Universidad de Deusto (6.000 alumnos)','Lakobra Espazioa (sala alternativa)','D8 Sorkuntza Faktoria (fábrica cultural)','Txosnagunea — Fiestas de Deusto (10 días, mar)'],
+   scores:{demo:74,eco:65,mov:77,din:88,dem:70}, atlasScore:75,
+   insight:'Epicentro de la escena cultural alternativa y universitaria bilbaína. Alta actividad DIY y festiva. Las Fiestas de Deusto saturan la estación.'},
+
+  {id:'cascoviejo', name:'Zazpikaleak/C.Viejo', zone:'A', lines:['L1'],
+   pop:15800, sex:{m:46,f:54}, age:{a:11,b:22,c:47,d:20}, renta:{alta:20,media:44,baja:36},
+   eco:{retail:48,restauracion:55,hoteles:8,airbnb:310,parking:4,oficinas:12,industria:0,hospitales:0,educacion:3},
+   pasajeros_dia:18700,
+   perfil:['🏛️ Cultural','🗺️ Turístico','🍺 Ocio','🎭 Conciertos'],
+   tractors:['Bilborock (sala conciertos, aforo 600)','Kafe Antzokia (600 aforo)','Las Siete Calles (patrimonio)','Mercado La Ribera','Alhóndiga Bilbao'],
+   scores:{demo:70,eco:80,din:93,mov:75,dem:83}, atlasScore:80,
+   insight:'Núcleo histórico y cultural. Patrón radicalmente distinto L-V / fin de semana. Principal atractor turístico con alta densidad de oferta hostelera.'},
+
+  {id:'sarriko', name:'Sarriko', zone:'A', lines:['L1'],
+   pop:11400, sex:{m:45,f:55}, age:{a:9,b:31,c:44,d:16}, renta:{alta:12,media:46,baja:42},
+   eco:{retail:8,restauracion:14,hoteles:0,airbnb:22,parking:2,oficinas:8,industria:1,hospitales:0,educacion:18},
+   pasajeros_dia:7200,
+   perfil:['🎓 Universitario','🏘️ Residencial'],
+   tractors:['UPV/EHU — Campus Sarriko (Economía y Empresa, 4.500 alumnos)','Parque Etxebarria (acceso sur)'],
+   scores:{demo:67,eco:55,mov:72,din:58,dem:63}, atlasScore:63,
+   insight:'Estación universitaria con fuerte dependencia del calendario académico. Reducción significativa en veranos y festivos.'},
+
+  {id:'sanignazio', name:'San Ignazio', zone:'A', lines:['L1'],
+   pop:13900, sex:{m:47,f:53}, age:{a:13,b:22,c:48,d:17}, renta:{alta:14,media:48,baja:38},
+   eco:{retail:10,restauracion:16,hoteles:0,airbnb:18,parking:2,oficinas:6,industria:2,hospitales:0,educacion:6},
+   pasajeros_dia:6800,
+   perfil:['🏘️ Residencial','🎸 Cultura emergente'],
+   tractors:['D8 Sorkuntza Faktoria (nodo cultural punk/metal)','Parque Etxebarria (900.000 m²)'],
+   scores:{demo:70,eco:52,mov:67,din:64,dem:60}, atlasScore:63,
+   insight:'Barrio residencial con creciente centralidad cultural gracias a D8. Baja actividad comercial propia.'},
+
+  {id:'santutxu', name:'Santutxu', zone:'A', lines:['L1'],
+   pop:15200, sex:{m:47,f:53}, age:{a:14,b:18,c:50,d:18}, renta:{alta:10,media:44,baja:46},
+   eco:{retail:12,restauracion:18,hoteles:0,airbnb:12,parking:2,oficinas:4,industria:3,hospitales:0,educacion:5},
+   pasajeros_dia:6200,
+   perfil:['🏘️ Residencial popular'],
+   tractors:['Parque Etxebarria (acceso norte)','La Nube Café Teatro (sala pequeña, aforo 200)'],
+   scores:{demo:67,eco:47,mov:64,din:50,dem:56}, atlasScore:57,
+   insight:'Barrio obrero densificado. Carácter eminentemente residencial con escasa atracción externa.'},
+
+  {id:'bolueta', name:'Bolueta', zone:'A', lines:['L1'],
+   pop:9800, sex:{m:48,f:52}, age:{a:12,b:20,c:50,d:18}, renta:{alta:8,media:42,baja:50},
+   eco:{retail:6,restauracion:8,hoteles:0,airbnb:8,parking:1,oficinas:4,industria:8,hospitales:0,educacion:3},
+   pasajeros_dia:4100,
+   perfil:['🏭 Transición urbana','🏘️ Residencial'],
+   tractors:['Proyecto Zorrotzaurre (isla, 65 Ha en desarrollo)','Acceso puente Euskalduna'],
+   scores:{demo:62,eco:45,mov:60,din:44,dem:52}, atlasScore:53,
+   insight:'Zona en transformación. Zorrotzaurre prevé nueva demanda significativa a medio plazo (+5.000 hab estimados).'},
+
+  {id:'basarrate', name:'Basarrate', zone:'A', lines:['L1'],
+   pop:8400, sex:{m:47,f:53}, age:{a:13,b:18,c:49,d:20}, renta:{alta:10,media:44,baja:46},
+   eco:{retail:5,restauracion:6,hoteles:0,airbnb:6,parking:1,oficinas:2,industria:2,hospitales:0,educacion:3},
+   pasajeros_dia:3200,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:60,eco:40,mov:55,din:40,dem:48}, atlasScore:49,
+   insight:'Estación residencial de escala local. Sin atractores externos relevantes.'},
+
+  // ── ZONA B0 ──────────────────────────────────────────────────────────
+  {id:'etxebarri', name:'Etxebarri', zone:'B0', lines:['L1'],
+   pop:7600, sex:{m:49,f:51}, age:{a:14,b:17,c:51,d:18}, renta:{alta:8,media:46,baja:46},
+   eco:{retail:8,restauracion:10,hoteles:0,airbnb:4,parking:1,oficinas:4,industria:10,hospitales:0,educacion:4},
+   pasajeros_dia:3400,
+   perfil:['🏘️ Residencial','🏭 Industrial'],
+   tractors:['Cross Atletismo Etxebarri (evento anual, 600 corredores)'],
+   scores:{demo:58,eco:42,mov:54,din:42,dem:50}, atlasScore:49,
+   insight:'Municipio limítrofe. Demanda casi exclusiva de residentes propios. Baja penetración modal del metro.'},
+
+  {id:'basauri', name:'Basauri', zone:'B0', lines:['L1'],
+   pop:22800, sex:{m:49,f:51}, age:{a:14,b:17,c:52,d:17}, renta:{alta:8,media:48,baja:44},
+   eco:{retail:22,restauracion:20,hoteles:1,airbnb:12,parking:3,oficinas:10,industria:12,hospitales:1,educacion:8},
+   pasajeros_dia:5800,
+   perfil:['🏘️ Residencial','🏭 Industrial','🚉 Terminal L1'],
+   tractors:['Centro urbano Basauri (Ayuntamiento, mercado)','Polígono industrial Asuaran','Hospital de Basauri'],
+   scores:{demo:62,eco:48,mov:57,din:44,dem:55}, atlasScore:53,
+   insight:'Terminal sur de L1. Centro municipal propio con actividad endógena relevante. Importante volumen de viajeros de acceso.'},
+
+  // ── ZONA B1 ──────────────────────────────────────────────────────────
+  {id:'lutxana', name:'Lutxana', zone:'B1', lines:['L1'],
+   pop:8200, sex:{m:51,f:49}, age:{a:12,b:16,c:54,d:18}, renta:{alta:8,media:44,baja:48},
+   eco:{retail:4,restauracion:6,hoteles:0,airbnb:2,parking:1,oficinas:4,industria:22,hospitales:0,educacion:2},
+   pasajeros_dia:2800,
+   perfil:['🏭 Industrial'],
+   tractors:['Zona industrial Erandio','Astilleros de Euskalduna (patrimonio)'],
+   scores:{demo:52,eco:50,mov:54,din:34,dem:47}, atlasScore:47,
+   insight:'Estación laboral-industrial. Flujos concentrados en horas de entrada y salida de turno. Nula actividad nocturna y festiva.'},
+
+  {id:'erandio', name:'Erandio', zone:'B1', lines:['L1'],
+   pop:10400, sex:{m:50,f:50}, age:{a:13,b:16,c:53,d:18}, renta:{alta:10,media:46,baja:44},
+   eco:{retail:6,restauracion:8,hoteles:0,airbnb:4,parking:1,oficinas:6,industria:18,hospitales:0,educacion:3},
+   pasajeros_dia:3600,
+   perfil:['🏭 Industrial','🏘️ Residencial','🌊 Ría'],
+   tractors:['Puerto interior de Bilbao (acceso logístico)','Proyecto Zorrotzaurre (impacto futuro)'],
+   scores:{demo:55,eco:58,mov:60,din:42,dem:52}, atlasScore:53,
+   insight:'Municipio en reconversión industrial. Nueva demanda prevista por Zorrotzaurre si el desarrollo se materializa.'},
+
+  {id:'astrabudua', name:'Astrabudua', zone:'B1', lines:['L1'],
+   pop:7800, sex:{m:49,f:51}, age:{a:13,b:17,c:52,d:18}, renta:{alta:8,media:46,baja:46},
+   eco:{retail:5,restauracion:6,hoteles:0,airbnb:2,parking:1,oficinas:4,industria:8,hospitales:0,educacion:3},
+   pasajeros_dia:2400,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:54,eco:42,mov:54,din:37,dem:47}, atlasScore:47,
+   insight:'Estación residencial en el continuo urbano de Erandio. Sin singularidades territoriales.'},
+
+  {id:'leioa', name:'Leioa', zone:'B1', lines:['L1'],
+   pop:13600, sex:{m:46,f:54}, age:{a:11,b:30,c:44,d:15}, renta:{alta:14,media:50,baja:36},
+   eco:{retail:10,restauracion:18,hoteles:1,airbnb:28,parking:3,oficinas:14,industria:2,hospitales:0,educacion:24},
+   pasajeros_dia:8200,
+   perfil:['🎓 Universitario','🏘️ Residencial'],
+   tractors:['UPV/EHU Campus Leioa (campus principal: ~20.000 alumnos)','Residencias universitarias (~1.500 plazas)','Bibliotekas y servicios universitarios'],
+   scores:{demo:65,eco:52,mov:68,din:58,dem:63}, atlasScore:61,
+   insight:'Segundo gran campus universitario del PV. El calendario académico domina la demanda. Potencial de movilidad nocturna infrautilizado.'},
+
+  {id:'lamiako', name:'Lamiako', zone:'B1', lines:['L1'],
+   pop:9200, sex:{m:49,f:51}, age:{a:12,b:20,c:52,d:16}, renta:{alta:18,media:52,baja:30},
+   eco:{retail:8,restauracion:12,hoteles:8,airbnb:60,parking:4,oficinas:24,industria:2,hospitales:0,educacion:2},
+   pasajeros_dia:6400,
+   perfil:['✈️ Aeroportuario','🏢 Empresarial','🏨 Hotelero'],
+   tractors:['Aeropuerto BIO Loiu (~2,5 km, 5,2M pax/año)','Parque empresarial LAE','Cluster hotelero aeroportuario (6 hoteles)'],
+   scores:{demo:60,eco:70,mov:72,din:54,dem:65}, atlasScore:64,
+   insight:'Gateway aeroportuario. Alta rotación de usuarios no residentes (turistas, viajeros de negocio). Patrón horario atípico (madrugadas incluidas).'},
+
+  {id:'areeta', name:'Areeta', zone:'B1', lines:['L1'],
+   pop:12800, sex:{m:46,f:54}, age:{a:12,b:18,c:50,d:20}, renta:{alta:34,media:46,baja:20},
+   eco:{retail:32,restauracion:28,hoteles:3,airbnb:95,parking:5,oficinas:18,industria:0,hospitales:0,educacion:4},
+   pasajeros_dia:9400,
+   perfil:['🛍️ Comercial','🏘️ Residencial premium','🌊 Playa'],
+   tractors:['Las Arenas (núcleo comercial de Getxo)','Playa de Las Arenas (temporada estival)','Puerto deportivo del Abra','Puente Colgante (UNESCO, acceso norte)'],
+   scores:{demo:72,eco:75,mov:74,din:70,dem:68}, atlasScore:72,
+   insight:'Centro neurálgico de Getxo. Principal atractor comercial y de ocio para toda la margen derecha de la ría.'},
+
+  {id:'gobela', name:'Gobela', zone:'B1', lines:['L1'],
+   pop:7400, sex:{m:47,f:53}, age:{a:13,b:15,c:50,d:22}, renta:{alta:26,media:50,baja:24},
+   eco:{retail:6,restauracion:8,hoteles:0,airbnb:22,parking:2,oficinas:6,industria:0,hospitales:0,educacion:2},
+   pasajeros_dia:3200,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:62,eco:44,mov:60,din:40,dem:50}, atlasScore:51,
+   insight:'Estación residencial de conexión entre Areeta y Neguri. Demanda exclusivamente de residentes.'},
+
+  {id:'neguri', name:'Neguri', zone:'B1', lines:['L1'],
+   pop:9600, sex:{m:46,f:54}, age:{a:11,b:14,c:48,d:27}, renta:{alta:54,media:36,baja:10},
+   eco:{retail:8,restauracion:14,hoteles:0,airbnb:48,parking:2,oficinas:10,industria:0,hospitales:0,educacion:3},
+   pasajeros_dia:4800,
+   perfil:['🏘️ Residencial premium','🌊 Costero','⛳ Ocio exclusivo'],
+   tractors:['Real Club Marítimo del Abra','Club de Golf de Neguri (18 hoyos)','Zona residencial de mayor renta del PV'],
+   scores:{demo:75,eco:84,mov:60,din:55,dem:60}, atlasScore:67,
+   insight:'Mayor renta media del área metropolitana. Perfil residencial de alto standing. Baja generación de eventos externos; alta generación de desplazamientos laborales hacia Bilbao.'},
+
+  {id:'aiboa', name:'Aiboa', zone:'B1', lines:['L1'],
+   pop:6800, sex:{m:47,f:53}, age:{a:12,b:15,c:50,d:23}, renta:{alta:28,media:48,baja:24},
+   eco:{retail:4,restauracion:6,hoteles:0,airbnb:14,parking:1,oficinas:4,industria:0,hospitales:0,educacion:2},
+   pasajeros_dia:2600,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:60,eco:42,mov:57,din:37,dem:47}, atlasScore:49,
+   insight:'Estación intermedia residencial en el tramo Neguri–Algorta. Sin actividad propia relevante.'},
+
+  {id:'algorta', name:'Algorta', zone:'B1', lines:['L1'],
+   pop:14200, sex:{m:47,f:53}, age:{a:13,b:17,c:49,d:21}, renta:{alta:28,media:48,baja:24},
+   eco:{retail:22,restauracion:30,hoteles:3,airbnb:120,parking:3,oficinas:10,industria:0,hospitales:0,educacion:4},
+   pasajeros_dia:7800,
+   perfil:['🛍️ Comercial','🌊 Costero','🏛️ Turístico'],
+   tractors:['Puerto Viejo de Algorta (atractor turístico primario)','Playa de Arrigunaga (900m, verano)','Ayuntamiento de Getxo','Semana de la Bicicleta (evento anual)'],
+   scores:{demo:67,eco:71,mov:69,din:73,dem:65}, atlasScore:69,
+   insight:'Principal polo turístico y de ocio de Getxo. Puerto Viejo como atractor cultural diferencial. Alta demanda estival con caída brusca en invierno.'},
+
+  {id:'bidezabal', name:'Bidezabal', zone:'B1', lines:['L1'],
+   pop:6200, sex:{m:47,f:53}, age:{a:12,b:16,c:49,d:23}, renta:{alta:24,media:50,baja:26},
+   eco:{retail:4,restauracion:6,hoteles:0,airbnb:10,parking:1,oficinas:4,industria:0,hospitales:0,educacion:2},
+   pasajeros_dia:2200,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:57,eco:40,mov:54,din:37,dem:44}, atlasScore:46,
+   insight:'Estación residencial en el tramo final norte hacia Plentzia. Muy baja diversidad de usos.'},
+
+  {id:'ibarbengoa', name:'Ibarbengoa', zone:'B1', lines:['L1'],
+   pop:4200, sex:{m:49,f:51}, age:{a:13,b:15,c:50,d:22}, renta:{alta:20,media:50,baja:30},
+   eco:{retail:2,restauracion:3,hoteles:0,airbnb:4,parking:0,oficinas:2,industria:1,hospitales:0,educacion:2},
+   pasajeros_dia:1400,
+   perfil:['🌿 Periurbano','🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:52,eco:34,mov:47,din:30,dem:39}, atlasScore:40,
+   insight:'Estación periurbana con captación de demanda muy limitada y exclusivamente residencial.'},
+
+  {id:'berango', name:'Berango', zone:'B1', lines:['L1'],
+   pop:3800, sex:{m:49,f:51}, age:{a:14,b:14,c:51,d:21}, renta:{alta:22,media:50,baja:28},
+   eco:{retail:2,restauracion:3,hoteles:0,airbnb:3,parking:0,oficinas:2,industria:1,hospitales:0,educacion:2},
+   pasajeros_dia:1200,
+   perfil:['🌿 Periurbano','🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:51,eco:33,mov:46,din:28,dem:38}, atlasScore:39,
+   insight:'Municipio periurbano con escasa densidad. Pendulares laborales hacia Bilbao como única demanda relevante.'},
+
+  // ── ZONA B2 ──────────────────────────────────────────────────────────
+  {id:'gurutzeta', name:'Gurutzeta/Cruces', zone:'B2', lines:['L2'],
+   pop:16400, sex:{m:47,f:53}, age:{a:12,b:18,c:50,d:20}, renta:{alta:18,media:50,baja:32},
+   eco:{retail:10,restauracion:16,hoteles:2,airbnb:30,parking:4,oficinas:12,industria:0,hospitales:3,educacion:8},
+   pasajeros_dia:9600,
+   perfil:['🏥 Sanitario','🎓 Medicina','🏘️ Residencial'],
+   tractors:['Hospital Universitario de Cruces (mayor hospital PV: 934 camas)','UPV/EHU — Facultad Medicina','Clínicas privadas adyacentes','Ambulatorio de Cruces'],
+   scores:{demo:68,eco:62,mov:71,din:58,dem:67}, atlasScore:65,
+   insight:'Estación hospitalaria de primer orden. Flujo constante 7 días/semana incluyendo festivos. Patrón horario ampliado (visitas, personal sanitario, urgencias).'},
+
+  {id:'ansio', name:'Ansio', zone:'B2', lines:['L2'],
+   pop:8400, sex:{m:51,f:49}, age:{a:11,b:19,c:56,d:14}, renta:{alta:14,media:50,baja:36},
+   eco:{retail:6,restauracion:14,hoteles:6,airbnb:85,parking:12,oficinas:18,industria:4,hospitales:0,educacion:1},
+   pasajeros_dia:14200,
+   perfil:['🏭 Eventos masivos','🛍️ Ferial','🚉 BEC'],
+   tractors:['BEC Bilbao Exhibition Centre (66.000 m² — 1er recinto ferial norte España)','BIEMH 2026 (39.000 asistentes)','Gustoko Feria Gastronomía','Japan Weekend Bilbao'],
+   scores:{demo:55,eco:76,mov:78,din:90,dem:73}, atlasScore:74,
+   insight:'Estación del BEC. Picos de demanda extremos totalmente dependientes del calendario ferial. Entre eventos: demanda casi nula. Gestión dual crítica.'},
+
+  {id:'barakaldo', name:'Barakaldo', zone:'B2', lines:['L2'],
+   pop:28600, sex:{m:49,f:51}, age:{a:14,b:18,c:52,d:16}, renta:{alta:14,media:50,baja:36},
+   eco:{retail:44,restauracion:32,hoteles:3,airbnb:45,parking:8,oficinas:20,industria:14,hospitales:1,educacion:8},
+   pasajeros_dia:11800,
+   perfil:['🛍️ Comercial (Megapark)','🏘️ Residencial','🏭 Industrial'],
+   tractors:['Megapark Barakaldo (gran centro comercial supramunicipal)','Estadio San Jorge (Barakaldo CF)','Carrera Popular Barakaldo (1.500 corredores)'],
+   scores:{demo:72,eco:78,mov:77,din:70,dem:74}, atlasScore:74,
+   insight:'Segundo municipio del área metropolitana. Megapark como gran atractor comercial. Alta densidad residencial con fuerte actividad comercial propia.'},
+
+  {id:'bagatza', name:'Bagatza', zone:'B2', lines:['L2'],
+   pop:10400, sex:{m:49,f:51}, age:{a:13,b:17,c:53,d:17}, renta:{alta:10,media:50,baja:40},
+   eco:{retail:8,restauracion:10,hoteles:0,airbnb:10,parking:2,oficinas:6,industria:8,hospitales:0,educacion:4},
+   pasajeros_dia:4200,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:60,eco:47,mov:59,din:43,dem:51}, atlasScore:52,
+   insight:'Barrio residencial de Barakaldo. Demanda mayoritariamente pendular hacia Bilbao.'},
+
+  {id:'urbinaga', name:'Urbinaga', zone:'B2', lines:['L2'],
+   pop:7600, sex:{m:50,f:50}, age:{a:13,b:16,c:53,d:18}, renta:{alta:8,media:46,baja:46},
+   eco:{retail:4,restauracion:6,hoteles:0,airbnb:4,parking:1,oficinas:4,industria:14,hospitales:0,educacion:2},
+   pasajeros_dia:2600,
+   perfil:['🏘️ Residencial','🏭 Industrial'],
+   tractors:[],
+   scores:{demo:55,eco:44,mov:54,din:36,dem:47}, atlasScore:47,
+   insight:'Zona de transición industrial-residencial en el continuo de la margen izquierda.'},
+
+  {id:'sestao', name:'Sestao', zone:'B2', lines:['L2'],
+   pop:12800, sex:{m:50,f:50}, age:{a:13,b:17,c:52,d:18}, renta:{alta:8,media:44,baja:48},
+   eco:{retail:10,restauracion:12,hoteles:0,airbnb:8,parking:2,oficinas:6,industria:18,hospitales:1,educacion:5},
+   pasajeros_dia:5400,
+   perfil:['🏘️ Residencial','🏭 Post-industrial'],
+   tractors:['Centro urbano Sestao (mercado, ayuntamiento)','Altos Hornos de Vizcaya (patrimonio industrial)','Playa de la Cantera (cercana)'],
+   scores:{demo:57,eco:50,mov:59,din:47,dem:54}, atlasScore:53,
+   insight:'Municipio en regeneración post-industrial. Fuerte identidad obrera. Potencial de nuevos usos residenciales y culturales.'},
+
+  {id:'abatxolo', name:'Abatxolo', zone:'B2', lines:['L2'],
+   pop:7200, sex:{m:49,f:51}, age:{a:13,b:16,c:52,d:19}, renta:{alta:8,media:44,baja:48},
+   eco:{retail:4,restauracion:6,hoteles:0,airbnb:3,parking:1,oficinas:2,industria:6,hospitales:0,educacion:2},
+   pasajeros_dia:2200,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:52,eco:38,mov:51,din:34,dem:44}, atlasScore:44,
+   insight:'Estación residencial intermedia sin singularidades territoriales propias.'},
+
+  {id:'portugalete', name:'Portugalete', zone:'B2', lines:['L2'],
+   pop:16200, sex:{m:48,f:52}, age:{a:12,b:17,c:51,d:20}, renta:{alta:12,media:48,baja:40},
+   eco:{retail:18,restauracion:22,hoteles:1,airbnb:55,parking:3,oficinas:8,industria:4,hospitales:1,educacion:5},
+   pasajeros_dia:7200,
+   perfil:['🏛️ Turístico','🗺️ Patrimonio UNESCO','🏘️ Residencial'],
+   tractors:['Puente Colgante de Vizcaya (UNESCO World Heritage 2006)','Paseo de la Canilla (paseo marítimo)','Centro histórico de Portugalete'],
+   scores:{demo:65,eco:63,mov:64,din:70,dem:62}, atlasScore:65,
+   insight:'El Puente Colgante genera un flujo turístico diferenciado y estacional. Importante potencial de activación cultural poco explotado.'},
+
+  {id:'penota', name:'Peñota', zone:'B2', lines:['L2'],
+   pop:6400, sex:{m:49,f:51}, age:{a:13,b:16,c:51,d:20}, renta:{alta:8,media:44,baja:48},
+   eco:{retail:3,restauracion:4,hoteles:0,airbnb:2,parking:0,oficinas:2,industria:4,hospitales:0,educacion:2},
+   pasajeros_dia:1800,
+   perfil:['🏘️ Residencial'],
+   tractors:[],
+   scores:{demo:50,eco:34,mov:49,din:30,dem:41}, atlasScore:41,
+   insight:'Estación residencial sin atractores relevantes. Generadora pura de movilidad pendular hacia centros del área.'},
+
+  {id:'kabiezes', name:'Kabiezes', zone:'B2', lines:['L2'],
+   pop:5800, sex:{m:49,f:51}, age:{a:13,b:16,c:51,d:20}, renta:{alta:8,media:44,baja:48},
+   eco:{retail:2,restauracion:4,hoteles:0,airbnb:2,parking:0,oficinas:2,industria:4,hospitales:0,educacion:2},
+   pasajeros_dia:1600,
+   perfil:['🏘️ Residencial','🌿 Periurbano'],
+   tractors:[],
+   scores:{demo:49,eco:33,mov:48,din:28,dem:39}, atlasScore:39,
+   insight:'Estación periurbana próxima a Santurtzi. Muy baja actividad propia.'},
+
+  {id:'santurtzi', name:'Santurtzi', zone:'B2', lines:['L2'],
+   pop:18400, sex:{m:50,f:50}, age:{a:13,b:17,c:52,d:18}, renta:{alta:10,media:46,baja:44},
+   eco:{retail:18,restauracion:20,hoteles:1,airbnb:22,parking:3,oficinas:8,industria:16,hospitales:1,educacion:6},
+   pasajeros_dia:6800,
+   perfil:['🚢 Puerto','🏘️ Residencial','🏭 Industrial','🚉 Terminal L2'],
+   tractors:['Puerto de Santurtzi — ferri Brittany Ferries (Portsmouth)','Centro urbano Santurtzi','Gaztetxe La Kelo (sala alternativa)'],
+   scores:{demo:62,eco:58,mov:61,din:55,dem:57}, atlasScore:59,
+   insight:'Terminal sur de L2. Puerto activo con tráfico de ferri internacional (Portsmouth). Fuerte identidad marinera e industrial.'},
+
+  // ── ZONA C ──────────────────────────────────────────────────────────
+  {id:'larrabasterra', name:'Larrabasterra', zone:'C', lines:['L1'],
+   pop:2800, sex:{m:49,f:51}, age:{a:15,b:13,c:50,d:22}, renta:{alta:18,media:52,baja:30},
+   eco:{retail:1,restauracion:2,hoteles:0,airbnb:2,parking:0,oficinas:1,industria:1,hospitales:0,educacion:1},
+   pasajeros_dia:900,
+   perfil:['🌿 Periurbano'],
+   tractors:[],
+   scores:{demo:44,eco:30,mov:41,din:27,dem:34}, atlasScore:35,
+   insight:'Municipio costero de carácter rural-periurbano. Demanda marginal y exclusivamente residencial. Indicador extremo de penetración baja.'},
+
+  {id:'sopela', name:'Sopela', zone:'C', lines:['L1'],
+   pop:5200, sex:{m:49,f:51}, age:{a:14,b:18,c:50,d:18}, renta:{alta:20,media:52,baja:28},
+   eco:{retail:4,restauracion:8,hoteles:1,airbnb:45,parking:1,oficinas:2,industria:1,hospitales:0,educacion:2},
+   pasajeros_dia:2400,
+   perfil:['🌊 Costero','🏄 Surf','🌿 Periurbano'],
+   tractors:['Playa de Sopela (spot de surf reconocido)','Camping Sopela (250 parcelas)','Acceso Playa de Arriatera'],
+   scores:{demo:50,eco:44,mov:47,din:54,dem:44}, atlasScore:48,
+   insight:'Destino de playa y surf. Altísima estacionalidad: fines de semana de verano vs. invierno radicalmente distintos. Airbnb muy por encima de la media.'},
+
+  {id:'urduliz', name:'Urduliz', zone:'C', lines:['L1'],
+   pop:3200, sex:{m:49,f:51}, age:{a:15,b:13,c:51,d:21}, renta:{alta:18,media:52,baja:30},
+   eco:{retail:1,restauracion:2,hoteles:0,airbnb:3,parking:0,oficinas:1,industria:1,hospitales:0,educacion:1},
+   pasajeros_dia:1100,
+   perfil:['🌿 Periurbano'],
+   tractors:[],
+   scores:{demo:42,eco:29,mov:40,din:24,dem:32}, atlasScore:33,
+   insight:'Municipio periurbano de pequeña escala. Viajes laborales hacia Bilbao como única demanda significativa.'},
+
+  {id:'plentzia', name:'Plentzia', zone:'C', lines:['L1'],
+   pop:4800, sex:{m:48,f:52}, age:{a:13,b:16,c:48,d:23}, renta:{alta:24,media:50,baja:26},
+   eco:{retail:6,restauracion:10,hoteles:2,airbnb:58,parking:1,oficinas:3,industria:1,hospitales:0,educacion:2},
+   pasajeros_dia:2800,
+   perfil:['🌊 Costero','🗺️ Turístico','🚉 Terminal L1'],
+   tractors:['Playa de Plentzia (1,5 km, bandera azul)','Puerto deportivo de Plentzia','Centro histórico medieval','Fiestas de Santa Ana (julio)'],
+   scores:{demo:48,eco:47,mov:44,din:56,dem:40}, atlasScore:47,
+   insight:'Terminal norte de L1. Destino vacacional y de ocio. Máxima demanda estival; mínima en invierno. Indicador clave de estacionalidad de la red.'},
+];
+
+function scoreColor(v){return v>=75?'#10B981':v>=50?'#F59E0B':'#EF4444';}
+function scoreBg(v){return v>=75?'#F0FDF4':v>=50?'#FFFBEB':'#FEF2F2';}
+function fmtNum(n){return n>=1000?(n/1000).toFixed(n>=10000?0:1)+'k':n;}
+
+// ── STATION STATE ────────────────────────────────────────────────────
+const SS={q:'',zones:new Set(['A','B0','B1','B2','C']),line:'all',sort:'score',selected:null};
+
+function filteredStns(){
+  return STN_DATA.filter(s=>{
+    if(!SS.zones.has(s.zone))return false;
+    if(SS.line!=='all'&&!s.lines.includes(SS.line))return false;
+    if(SS.q&&!s.name.toLowerCase().includes(SS.q))return false;
+    return true;
+  }).sort((a,b)=>{
+    if(SS.sort==='score')return b.atlasScore-a.atlasScore;
+    if(SS.sort==='nombre')return a.name.localeCompare(b.name,'es');
+    if(SS.sort==='zona'){const zo=['A','B0','B1','B2','C'];return zo.indexOf(a.zone)-zo.indexOf(b.zone)||a.name.localeCompare(b.name,'es');}
+    return 0;
+  });
+}
+
+function renderZonePills(){
+  const el=document.getElementById('zone-pills');if(!el)return;
+  const zones=['A','B0','B1','B2','C'];
+  const counts={};STN_DATA.forEach(s=>counts[s.zone]=(counts[s.zone]||0)+1);
+  el.innerHTML=zones.map(z=>{
+    const m=ZONE_META[z],on=SS.zones.has(z);
+    return`<div class="szpill${on?' active':''}" data-zone="${z}" style="${on?`color:${m.color};border-color:${m.color}40;background:${m.color}0a`:''}" onclick="toggleZone('${z}')">
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:7px;height:7px;border-radius:50%;background:${m.color};display:inline-block;flex-shrink:0"></span>${m.label} <span style="font-size:7.5px;opacity:.7">${m.desc}</span></span>
+      <span style="font-size:8px;opacity:.7">${counts[z]}</span>
+    </div>`;
+  }).join('');
+}
+
+window.toggleZone=function(z){
+  if(SS.zones.has(z)&&SS.zones.size>1)SS.zones.delete(z);else SS.zones.add(z);
+  renderZonePills();renderStnGrid();
+};
+
+function renderStnGrid(){
+  const stns=filteredStns();
+  const el=document.getElementById('stn-grid');
+  const cnt=document.getElementById('stn-count-lbl');
+  if(!el)return;
+  cnt.textContent=stns.length+' estaciones';
+  el.innerHTML=stns.map(s=>{
+    const sc=s.atlasScore,col=scoreColor(sc),bg=scoreBg(sc);
+    const sel=SS.selected===s.id;
+    const lineBadges=s.lines.map(l=>`<span class="badge badge-${l.toLowerCase()}">${l}</span>`).join('');
+    const ptags=s.perfil.slice(0,2).map(p=>`<span class="ptag">${p}</span>`).join('');
+    const zm=ZONE_META[s.zone];
+    const barColors=['#6366F1','#F59E0B','#0EA5E9','#EC4899','#10B981'];
+    const dims=[s.scores.demo,s.scores.eco,s.scores.mov,s.scores.din,s.scores.dem];
+    const miniBars=dims.map((v,i)=>`<div class="stn-mini-bar" style="background:${barColors[i]};opacity:${0.3+v/100*.7}"></div>`).join('');
+    return`<div class="stn-card${sel?' selected':''}" onclick="selectStn('${s.id}')">
+      <div class="stn-card-top">
+        <div class="stn-card-name">${s.name}</div>
+        <div class="stn-score-badge" style="background:${bg};color:${col}">${sc}</div>
+      </div>
+      <div class="stn-badges"><span class="badge badge-zone" style="background:${zm.color}1a;color:${zm.color}">${zm.label}</span>${lineBadges}</div>
+      <div class="stn-perfil-tags">${ptags}</div>
+      <div class="stn-mini-bars">${miniBars}</div>
+    </div>`;
+  }).join('');
+}
+
+window.selectStn=function(id){
+  SS.selected=SS.selected===id?null:id;
+  renderStnGrid();renderStnDetail();
+};
+
+// ── DETAIL PANEL ─────────────────────────────────────────────────────
+function dimBarHtml(icon,name,val,color){
+  const c=color||(val>=75?'#10B981':val>=50?'#F59E0B':'#EF4444');
+  return`<div class="dim-row">
+    <div class="dim-icon">${icon}</div>
+    <div class="dim-name">${name}</div>
+    <div class="dim-bar-wrap"><div class="dim-bar" style="width:${val}%;background:${c}"></div></div>
+    <div class="dim-val" style="color:${c}">${val}</div>
+  </div>`;
+}
+
+function ecoBarHtml(label,val,max,color){
+  const pct=Math.min(100,Math.round(val/max*100));
+  return`<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+    <div style="width:88px;font-size:8px;color:var(--tx2);flex-shrink:0">${label}</div>
+    <div style="flex:1;height:5px;background:var(--s1);border-radius:3px;overflow:hidden">
+      <div style="width:${pct}%;height:100%;background:${color};border-radius:3px"></div>
+    </div>
+    <div style="width:28px;text-align:right;font-size:8px;font-weight:700;color:${color}">${val}</div>
+  </div>`;
+}
+
+function donutSvg(vals,colors,size){
+  size=size||52;const r=size/2,cr=r*.62,circ=2*Math.PI*cr;
+  let off=0;
+  const slices=vals.map((v,i)=>{
+    const dash=`${v/100*circ} ${circ}`;
+    const s=`<circle cx="${r}" cy="${r}" r="${cr}" fill="none" stroke="${colors[i]}" stroke-width="${r*.28}" stroke-dasharray="${dash}" stroke-dashoffset="${-off*circ/100}" transform="rotate(-90 ${r} ${r})"/>`;
+    off+=v;return s;
+  });
+  return`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${slices.join('')}</svg>`;
+}
+
+function renderStnDetail(){
+  const ph=document.getElementById('stn-ph');
+  const inner=document.getElementById('stn-detail-inner');
+  if(!SS.selected){ph.style.display='flex';inner.style.display='none';return;}
+  const s=STN_DATA.find(x=>x.id===SS.selected);
+  if(!s){ph.style.display='flex';inner.style.display='none';return;}
+  ph.style.display='none';inner.style.display='flex';
+
+  const sc=s.atlasScore,col=scoreColor(sc),bg=scoreBg(sc);
+  const zm=ZONE_META[s.zone];
+
+  // Header
+  const top=document.getElementById('stn-detail-top');
+  const lineBadges=s.lines.map(l=>`<span class="badge badge-${l.toLowerCase()}" style="font-size:9px;padding:2px 9px">${l}</span>`).join('');
+  top.innerHTML=`<div class="stn-detail-name">${s.name}</div>
+    <div class="stn-detail-meta">
+      <span class="badge badge-zone" style="background:${zm.color}1a;color:${zm.color};font-size:9px;padding:2px 9px">${zm.label} — ${zm.desc}</span>
+      ${lineBadges}
+      ${s.perfil.map(p=>`<span style="font-size:8px;color:var(--tx3)">${p}</span>`).join('')}
+    </div>`;
+
+  // Events
+  const stnEvs=EV_MANUAL.filter(e=>e.stn&&(N2ID[e.stn]===s.id||e.stn===s.name||e.stn.includes(s.name.split('/')[0])));
+
+  // Eco section max values for bars
+  const eco=s.eco;
+  const ecoMax={retail:60,restauracion:60,hoteles:15,airbnb:400,parking:15,oficinas:80,industria:25,hospitales:4,educacion:30};
+
+  const body=document.getElementById('stn-detail-body');
+  body.innerHTML=`
+  <!-- 0. Score ATLAS -->
+  <div class="dim-section" style="margin-bottom:10px">
+    <div style="display:flex;align-items:flex-start;gap:12px">
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:40px;font-weight:800;letter-spacing:-2px;line-height:1;color:${col}">${sc}</div>
+        <div style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--tx3);margin-top:2px">Score ATLAS</div>
+        <div style="margin-top:6px;padding:3px 8px;background:${bg};border-radius:20px;font-size:7.5px;font-weight:700;color:${col};white-space:nowrap">${sc>=75?'Alto':sc>=50?'Medio':'Bajo'}</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--tx3);margin-bottom:5px">¿Qué mide el Score ATLAS?</div>
+        <div style="font-size:8.5px;color:var(--tx2);line-height:1.6;margin-bottom:6px">Índice compuesto (0–100) que sintetiza <strong>5 dimensiones territoriales</strong> calculadas sobre la isócrona peatonal de 10 min de cada acceso. Mide la complejidad, atractivo y potencial de demanda de cada nodo.</div>
+        <div style="font-size:8.5px;color:var(--tx1);font-style:italic;line-height:1.5;border-left:2px solid ${col};padding-left:8px">${s.insight}</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;border-top:1px solid var(--s1);padding-top:10px">
+      ${dimBarHtml('👥','Sociodemográfico',s.scores.demo)}
+      ${dimBarHtml('🏢','Tejido económico',s.scores.eco)}
+      ${dimBarHtml('🚶','Accesibilidad',s.scores.mov)}
+      ${dimBarHtml('🎭','Dinámica urbana',s.scores.din)}
+      ${dimBarHtml('🚇','Demanda metro',s.scores.dem)}
+    </div>
+  </div>
+
+  <!-- 1. Población -->
+  <div class="dim-section">
+    <div class="dim-title">1 · Población · Isócrona peatonal 10 min</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="text-align:center">
+        <div style="font-size:28px;font-weight:800;letter-spacing:-1px;color:#6366F1">${fmtNum(s.pop)}</div>
+        <div style="font-size:7.5px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.4px">Habitantes</div>
+      </div>
+      <div style="flex:1;font-size:8.5px;color:var(--tx2);line-height:1.55">
+        Residentes dentro del área de captación peatonal de la estación. Esta cifra define la <strong>demanda potencial estructural</strong> del nodo, independientemente de los flujos atraídos por actividad externa.
+      </div>
+    </div>
+    <!-- 2. Distribución demografica -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <!-- Sexo -->
+      <div style="background:var(--bg);border-radius:6px;padding:8px">
+        <div style="font-size:7.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sexo</div>
+        <div style="display:flex;gap:4px;align-items:center;justify-content:center;margin-bottom:5px">
+          ${donutSvg([s.sex.m,s.sex.f],['#6366F1','#EC4899'],48)}
+        </div>
+        <div style="font-size:8px;color:var(--tx2);display:flex;flex-direction:column;gap:2px">
+          <div style="display:flex;justify-content:space-between"><span style="color:#6366F1">● Hombre</span><strong>${s.sex.m}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#EC4899">● Mujer</span><strong>${s.sex.f}%</strong></div>
+        </div>
+      </div>
+      <!-- Edad -->
+      <div style="background:var(--bg);border-radius:6px;padding:8px">
+        <div style="font-size:7.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Edad</div>
+        <div style="display:flex;gap:4px;align-items:center;justify-content:center;margin-bottom:5px">
+          ${donutSvg([s.age.a,s.age.b,s.age.c,s.age.d],['#F59E0B','#0EA5E9','#6366F1','#9CA3AF'],48)}
+        </div>
+        <div style="font-size:7.5px;color:var(--tx2);display:flex;flex-direction:column;gap:2px">
+          <div style="display:flex;justify-content:space-between"><span style="color:#F59E0B">0–14</span><strong>${s.age.a}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#0EA5E9">15–29</span><strong>${s.age.b}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#6366F1">30–64</span><strong>${s.age.c}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#9CA3AF">65+</span><strong>${s.age.d}%</strong></div>
+        </div>
+      </div>
+      <!-- Renta -->
+      <div style="background:var(--bg);border-radius:6px;padding:8px">
+        <div style="font-size:7.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Renta</div>
+        <div style="display:flex;gap:4px;align-items:center;justify-content:center;margin-bottom:5px">
+          ${donutSvg([s.renta.alta,s.renta.media,s.renta.baja],['#10B981','#F59E0B','#EF4444'],48)}
+        </div>
+        <div style="font-size:8px;color:var(--tx2);display:flex;flex-direction:column;gap:2px">
+          <div style="display:flex;justify-content:space-between"><span style="color:#10B981">● Alta</span><strong>${s.renta.alta}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#F59E0B">● Media</span><strong>${s.renta.media}%</strong></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#EF4444">● Baja</span><strong>${s.renta.baja}%</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Caracterización económica -->
+  <div class="dim-section">
+    <div class="dim-title">3 · Caracterización económica · POIs en isócrona</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px">
+      <div>
+        ${ecoBarHtml('🛍️ Retail',eco.retail,ecoMax.retail,'#6366F1')}
+        ${ecoBarHtml('🍽️ Restauración',eco.restauracion,ecoMax.restauracion,'#F59E0B')}
+        ${ecoBarHtml('🏨 Hoteles',eco.hoteles,ecoMax.hoteles,'#0EA5E9')}
+        ${ecoBarHtml('🏠 Airbnbs',eco.airbnb,ecoMax.airbnb,'#EC4899')}
+        ${ecoBarHtml('🅿️ Parkings',eco.parking,ecoMax.parking,'#8B5CF6')}
+      </div>
+      <div>
+        ${ecoBarHtml('🏢 Oficinas',eco.oficinas,ecoMax.oficinas,'#059669')}
+        ${ecoBarHtml('🏭 Industria',eco.industria,ecoMax.industria,'#9CA3AF')}
+        ${ecoBarHtml('🏥 Hospitales',eco.hospitales,ecoMax.hospitales,'#EF4444')}
+        ${ecoBarHtml('🎓 C. Educativos',eco.educacion,ecoMax.educacion,'#D97706')}
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Pasajeros diarios -->
+  <div class="dim-section">
+    <div class="dim-title">4 · Demanda metro</div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:28px;font-weight:800;letter-spacing:-1px;color:#10B981">${fmtNum(s.pasajeros_dia)}</div>
+        <div style="font-size:7.5px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.4px">Pax/día (media)</div>
+      </div>
+      <div style="flex:1">
+        <div style="height:8px;background:var(--s1);border-radius:4px;overflow:hidden;margin-bottom:5px">
+          <div style="height:100%;background:#10B981;border-radius:4px;width:${Math.min(100,Math.round(s.pasajeros_dia/300))}%"></div>
+        </div>
+        <div style="font-size:8px;color:var(--tx3)">Referencia: San Mamés ≈ 22.000 · Abando ≈ 28.500 · Berango ≈ 1.200</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Atractores -->
+  <div class="dim-section">
+    <div class="dim-title">5 · Principales atractores</div>
+    ${s.tractors.length?s.tractors.map(t=>`<div class="tractor-item"><div class="tractor-dot" style="background:#6366F1"></div>${t}</div>`).join(''):'<div style="font-size:8.5px;color:var(--tx3)">Sin atractores externos identificados en isócrona.</div>'}
+  </div>
+
+  <!-- 6. Eventos marzo 2026 -->
+  <div class="events-stn-section">
+    <div class="dim-title" style="display:flex;justify-content:space-between;align-items:center">
+      6 · Eventos · Marzo 2026
+      ${stnEvs.length?`<span style="font-size:8px;color:var(--tx3);font-weight:400">${stnEvs.length} evento${stnEvs.length>1?'s':''}</span>`:''}
+    </div>
+    ${stnEvs.length?stnEvs.slice(0,6).map(e=>{
+      const m=CAT[e.cat]||{c:KK,i:'🎪'};
+      return`<div class="stn-ev-item">
+        <div class="stn-ev-dot" style="background:${m.c}"></div>
+        <div><div class="stn-ev-name">${e.name}</div>
+        <div class="stn-ev-meta">${m.i} ${e.cat} · ${e.days[0].slice(5).replace('-','/')}${e.time&&e.time!=='TBC'?' · '+e.time:''} · ${e.venue}${e.cap?` · est. ${fmtNum(e.cap[0])}–${fmtNum(e.cap[1])} pax`:''}</div></div>
+      </div>`;
+    }).join('')+'':
+    '<div style="font-size:8.5px;color:var(--tx3)">Sin eventos en la base de datos de Marzo 2026.</div>'}
+  </div>
+
+  <div class="isoc-section">
+    <div class="isoc-title">🔵 Isócrona peatonal — metodología ATLAS</div>
+    <div class="isoc-text">El análisis cubre el área accesible a pie en <strong>10 minutos</strong> desde cada acceso de la estación, generando una huella territorial homogénea y comparable. Esta isócrona define la población flotante, los POIs analizados y el índice de captación de demanda potencial para cada nodo de la red.</div>
+  </div>`;
+}
+
+// ── VIEW SWITCH ──────────────────────────────────────────────────────
+let CV='agenda';
+document.querySelectorAll('.vtab').forEach(t=>t.addEventListener('click',()=>{
+  CV=t.dataset.view;
+  document.querySelectorAll('.vtab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const va=document.getElementById('view-agenda');
+  const ve=document.getElementById('view-estaciones');
+  va.style.display=CV==='agenda'?'flex':'none';
+  ve.style.display=CV==='estaciones'?'flex':'none';
+  document.querySelectorAll('.agenda-only').forEach(el=>{el.style.display=CV==='agenda'?'':' none';});
+  if(CV==='estaciones'){renderZonePills();renderStnGrid();}
+}));
+
+document.querySelectorAll('#sline-btns .lbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#sline-btns .lbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');SS.line=b.dataset.sline;renderStnGrid();
+}));
+document.querySelectorAll('#sort-btns .sort-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#sort-btns .sort-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');SS.sort=b.dataset.sort;renderStnGrid();
+}));
+
+
+</script>
+</body>
+</html>
